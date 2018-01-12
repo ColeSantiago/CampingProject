@@ -8,7 +8,8 @@ body{
 	display: flex;
 	justify-content: center;
 	padding: 10px;
-	font-size: 32px;
+	padding-top: 20px;
+	font-size: 38px;
 	color: white;
 	background-color: green;
 	opacity: 0.9;
@@ -16,8 +17,9 @@ body{
 #mainbodyDiv{
 	display: flex;
 	justify-content: center;
-	margin: 5px;
 	margin-top: 25px;
+	margin-left: 150px;
+	clear: both;
 }
 #container{
 	width: 750px;
@@ -26,18 +28,54 @@ body{
 	overflow: scroll;
 }
 #menu{
-	height: 800px;
+	height: 50px;
+	width: 100%;
 	float: left;
-	padding: 10px;
-	background-color: saddlebrown;
+	padding: 0px;
+	margin-bottom: 30px;
+	background-color: green;
 	color: white;
 	opacity: 0.9;
+	border-bottom: solid 2px white;
+	box-shadow: 0px 8px 5px #3c5221;
 }
+
+#menu > ul {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}
+
 #menu > ul > li{
-	margin-bottom: 10px;
-	margin-top: 40px;
-	font-size: 16px;
+	font-size: 20px;
+	display: inline;
+	text-transform: uppercase;
+	margin-left: 50px;
+	letter-spacing: 1px;
+	position: relative;
 }
+
+#menu > ul > li:hover {
+	color: white;
+}
+
+#menu > ul > li::after {
+	content: '';
+	display: block;
+	height: 3px;
+	background-color: white;
+	margin-top: 2px;
+
+	bottom: 0;
+	width: 0%;
+
+	transition: all ease-in-out 350ms;
+}
+
+#menu > ul > li:hover::after {
+	width: 100%;
+}
+
 #prep{
 	border: 2px solid white;
 	width: 800px;
@@ -70,5 +108,9 @@ body{
 	background-color: green;
 	color: white;
 	border-radius: 6px;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
 }
 
