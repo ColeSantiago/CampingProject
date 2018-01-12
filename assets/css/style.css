@@ -108,7 +108,13 @@ body{
 	background-color: green;
 	color: white;
 	border-radius: 6px;
+	opacity: 0.8;
 }
+.stateName:hover{
+	opacity: 1;
+}
+
+
 
 ::-webkit-scrollbar { 
     display: none; 

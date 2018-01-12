@@ -1,4 +1,4 @@
-	// array of states and abbrivs
+// array of states and abbrivs
 	const stateArr = [
 	{state:"Alabama", abbr: "AL"}, {state:"Alaska", abbr: "AK"},{state:"Arizona", abbr: "AZ"},{state:"Arkansas", abbr: "AR"},
 	{state:"California", abbr: "CA"},{state:"Colorado", abbr: "CO"},{state:"Connecticut", abbr: "CT"},{state:"Delaware", abbr: "DE"},
@@ -38,16 +38,30 @@
 
 		console.log(abbr);
 
-	const queryURL = "http://api.amp.active.com/camping/campgrounds/?pstate=" + abbr
-	+ "&api_key=ef9azejauz44cthn4n3hdfqb" 
+	const queryURL = "https://api.amp.active.com/camping/campgrounds/?pstate=" + abbr
+	+ "&api_key=cfm2765n6qup5q2ydvwbrqbw&v=JSON";
+	const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
 
-	$.ajax({
-      url: queryURL,
-      method: 'GET'
-    }).done(function(response) {
 
-      console.log(response);
 
-    });
+    $.ajax({
+    	url: proxyUrl + queryURL,
+    	headers:{
+    		authorization: 'Bearer ' + 'cfm2765n6qup5q2ydvwbrqbw'
+    	}
+    }).done(response => {
+    	console.log(response);
+    	window.res = response;
+    	$(res).find('result').each(function(r) { console.log($(this).attr('facilityName'))})
 
+    })
+    })
+	
+	//save for later allows to show allows to clear the page without changing files
+	$('#home').on('click', function(){
+		$('#wholeContainer').show();
 	})
+
+	
+
+
