@@ -9,6 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
 
@@ -29,15 +32,16 @@
 <div id="wholeContainer"> 
 	<div id="mainbodyDiv">
 	<!-- States/Citys will be stored here -->
-		<div id="container">
-		
-			
+		<div id="container">	
 
 		</div>
 
 		<div id="emergencyDiv"></div>
 	
 	</div>
+
+	<div id='map' style='width: 400px; height: 300px;'></div>
+		
 
 	<div id="prep">
 		<h2>How to be prepared</h2>

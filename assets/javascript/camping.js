@@ -1,3 +1,5 @@
+$(document).ready(function() {
+
 // array of states and abbrivs
 	const stateArr = [
 	{state:"Alabama", abbr: "AL"}, {state:"Alaska", abbr: "AK"},{state:"Arizona", abbr: "AZ"},{state:"Arkansas", abbr: "AR"},
@@ -38,23 +40,78 @@
 
 		console.log(abbr);
 
+
 	const queryURL = "https://api.amp.active.com/camping/campgrounds/?pstate=" + abbr
-	+ "&api_key=cfm2765n6qup5q2ydvwbrqbw&v=JSON";
+	+ "&json=true&api_key=8av4h3s7ecqejs3gbhcj6q6h";
 	const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
 
 
 
     $.ajax({
     	url: proxyUrl + queryURL,
+    	method: "GET",
     	headers:{
-    		authorization: 'Bearer ' + 'cfm2765n6qup5q2ydvwbrqbw'
+    		authorization: 'Bearer ' + '8av4h3s7ecqejs3gbhcj6q6h'
+
     	}
     }).done(response => {
-    	console.log(response);
+    	
     	window.res = response;
-    	$(res).find('result').each(function(r) { console.log($(this).attr('facilityName'))})
 
-    })
+    	let name = $(res).find('result').each(function(r) { 
+    		let nameTwo = $(this).attr('facilityName');
+    		console.log(nameTwo);
+    		
+    	})
+
+
+
+
+
+ 		// Map
+    	 $(res).find('result').each(function(r) {
+    		let lat = $(this).attr('latitude');
+    		let long = $(this).attr('longitude');
+    		console.log(lat);
+    		console.log(long);
+
+    		
+    		mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
+			var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/mapbox/outdoors-v10'
+			});
+
+			let markerImg = new Image();
+			markerImg.src = 'assets/images/marker.png';
+			markerImg.style.height = '30px';
+    		markerImg.style.width = '30px';
+
+			let marker = new mapboxgl.Marker(markerImg)
+			.setLngLat([long, lat])
+			.addTo(map)
+
+			map.addControl(new mapboxgl.NavigationControl());
+			// end map
+
+			// weather
+			const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + 
+    		"&APPID=187fb301a3565644c00135af35769e08";
+    		
+
+	    	$.ajax({
+	    		url: queryURLWeather,
+	    		method: "GET"
+	    	}).done(function(weatherResponse) {
+	    		console.log(weatherResponse.city.name);
+	    		console.log(weatherResponse.list[0].main);
+	    	})
+	    	// end weather
+    		
+			
+	
+		})
+	
     })
 	
 	//save for later allows to show allows to clear the page without changing files
@@ -63,5 +120,6 @@
 	})
 
 	
-
-
+})
+// closing tag for document ready
+});
