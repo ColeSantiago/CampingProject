@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    let longArray = [];
+
+    let latArray = [];
+
 // array of states and abbrivs
 	const stateArr = [
 	{state:"Alabama", abbr: "AL"}, {state:"Alaska", abbr: "AK"},{state:"Arizona", abbr: "AZ"},{state:"Arkansas", abbr: "AR"},
@@ -58,68 +62,99 @@ $(document).ready(function() {
     	
     	window.res = response;
 
-    	let name = $(res).find('result').each(function(r) { 
+
+    		let name = $(res).find('result').each(function(r) { 
+
     		let nameTwo = $(this).attr('facilityName');
-    		console.log(nameTwo);
-    		
-    	})
 
-
-
-
-
- 		// Map
-    	 $(res).find('result').each(function(r) {
     		let lat = $(this).attr('latitude');
     		let long = $(this).attr('longitude');
-    		console.log(lat);
-    		console.log(long);
 
-    		
-    		mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
-			var map = new mapboxgl.Map({
-			container: 'map',
-			style: 'mapbox://styles/mapbox/outdoors-v10'
-			});
+    		let campArray = [];
 
-			let markerImg = new Image();
-			markerImg.src = 'assets/images/marker.png';
-			markerImg.style.height = '30px';
-    		markerImg.style.width = '30px';
+    		longArray.push(long);
+    		latArray.push(lat);
+    		campArray.push(nameTwo);
 
-			let marker = new mapboxgl.Marker(markerImg)
-			.setLngLat([long, lat])
-			.addTo(map)
-
-			map.addControl(new mapboxgl.NavigationControl());
-			// end map
-
-			// weather
-			const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + 
-    		"&APPID=187fb301a3565644c00135af35769e08";
+    		console.log(campArray);
     		
 
-	    	$.ajax({
-	    		url: queryURLWeather,
-	    		method: "GET"
-	    	}).done(function(weatherResponse) {
-	    		console.log(weatherResponse.city.name);
-	    		console.log(weatherResponse.list[0].main);
-	    	})
-	    	// end weather
-    		
-			
-	
+
+    		// adding to the html
+    		for (let i = 0; i < campArray.length; i++) {
+
+	    		const campButtons = $('<button>');
+
+	    		campButtons.addClass('camp-button');
+
+	    		campButtons.attr('data-camp', campArray[i]);
+
+	    		campButtons.attr('data-lat', latArray[i]);
+	    		console.log(latArray[i]);
+
+	    		campButtons.attr('data-long', longArray[i]);
+	    		console.log(longArray[i]);
+
+	    		campButtons.text(campArray[i]);
+
+	    		let campName = $('#camp-name');	
+
+	    		campName.append(campButtons);
+
+
+			$(document).on('click', '.camp-button', function(){
+
+				
+			    		mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
+						var map = new mapboxgl.Map({
+						container: 'map',
+						style: 'mapbox://styles/mapbox/outdoors-v10'
+						});
+
+						let markerImg = new Image();
+						markerImg.src = 'assets/images/marker.png';
+						markerImg.style.height = '30px';
+			    		markerImg.style.width = '30px';
+
+						let marker = new mapboxgl.Marker(markerImg)
+						.setLngLat([longArray[i], latArray[i]])
+						.addTo(map)
+
+						map.addControl(new mapboxgl.NavigationControl());
+						// end map
+
+						// weather
+						const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latArray[i] + "&lon=" + longArray[i] + 
+			    		"&APPID=187fb301a3565644c00135af35769e08";
+			    		
+
+				    	$.ajax({
+				    		url: queryURLWeather,
+				    		method: "GET"
+				    	}).done(function(weatherResponse) {
+				    		console.log(weatherResponse.city.name);
+				    		console.log(weatherResponse.list[0].main);
+				    	})
+				    	// end weather		
+				
+				})
+
+			}
+
 		})
-	
+
     })
+ 		
+  })
+  
 	
 	//save for later allows to show allows to clear the page without changing files
 	$('#home').on('click', function(){
 		$('#wholeContainer').show();
 	})
 
+
+
 	
-})
 // closing tag for document ready
 });
