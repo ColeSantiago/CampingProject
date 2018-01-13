@@ -36,31 +36,49 @@
 		
 		let abbr = $(this).val();
 
+		const clickedElement = this;
+    	$('.stateName').each(function() {
+        if(this !== clickedElement) {
+        $(this).hide();    
+        }});
 		console.log(abbr);
+
+		$(this).animate({
+			opacity: 1,
+			height: "50px",
+		},1000,"linear");
+
+		$('.stateDiv').css("display","inline");
+
+		$("#container").css("overflow", "hidden");
 
 	const queryURL = "https://api.amp.active.com/camping/campgrounds/?pstate=" + abbr
 	+ "&api_key=cfm2765n6qup5q2ydvwbrqbw&v=JSON";
 	const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
 
 
-
     $.ajax({
     	url: proxyUrl + queryURL,
     	headers:{
-    		authorization: 'Bearer ' + 'cfm2765n6qup5q2ydvwbrqbw'
+    	authorization: 'Bearer ' + 'cfm2765n6qup5q2ydvwbrqbw'
     	}
     }).done(response => {
     	console.log(response);
     	window.res = response;
-    	$(res).find('result').each(function(r) { console.log($(this).attr('facilityName'))})
+    	$(res).find('result').each(function(r) 
+    	{ console.log($(this).attr('facilityName'))})
+
+    	console.log($.xml2json(response));
+    	let jsonResponse =  $.xml2json(response);
+    	console.log(this.jsonResponse.resultset.$.result);
 
     })
-    })
+   })
 	
 	//save for later allows to show allows to clear the page without changing files
-	$('#home').on('click', function(){
-		$('#wholeContainer').show();
-	})
+	// $('#home').on('click', function(){
+	// 	$('#wholeContainer').show();
+	// })
 
 	
 
