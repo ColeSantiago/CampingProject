@@ -120,5 +120,9 @@ body{
     display: none; 
 }
 
+#weather-main, 
+#weather-description {
+	background-color: white;
 
+}
 

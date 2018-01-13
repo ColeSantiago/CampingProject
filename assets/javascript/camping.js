@@ -104,7 +104,7 @@ $(document).ready(function() {
 
 			$(document).on('click', '.camp-button', function(){
 
-				
+						// map
 			    		mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
 						var map = new mapboxgl.Map({
 						container: 'map',
@@ -132,9 +132,16 @@ $(document).ready(function() {
 				    		url: queryURLWeather,
 				    		method: "GET"
 				    	}).done(function(weatherResponse) {
-				    		console.log(weatherResponse.city.name);
-				    		console.log(weatherResponse.list[0].main);
+				    		console.log(weatherResponse);
+
+				    		const weatherMain = $('#weather-main');
+				    		weatherMain.text(weatherResponse.list[0].weather[0].main);
+
+				    		const weatherDescription = $('#weather-description');
+				    		weatherDescription.text(weatherResponse.list[0].weather[0].description);
 				    	})
+
+				    	
 				    	// end weather		
 				
 				})
