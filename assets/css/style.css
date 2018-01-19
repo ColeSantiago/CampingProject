@@ -120,7 +120,7 @@ body{
     display: none; 
 }
 
-#weather-main, 
+#weather-temp, 
 #weather-description {
 	background-color: white;
 
