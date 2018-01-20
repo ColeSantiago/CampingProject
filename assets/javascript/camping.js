@@ -135,6 +135,7 @@
 //hiking project API
 
 const hikingQueryURL = "https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200209593-2d1e8288276f62fa07701a4f0905a28f";
+const googleKey = "AIzaSyBrOBxoUcixY45qX-6hjadqLqguNgBj3Tg";
 
 $.ajax({
       url: hikingQueryURL,
@@ -146,15 +147,22 @@ $.ajax({
 	    console.log(response.trails[i].id);
 
 	    const trailsDiv = $('<div>');
-	    const trailsId = response.trails[i].id
-		
-		const trailsFrameURL = "style='width:100%; max-width:1200px; height:410px;'" 
-		// frameborder='0', 
-		// scrolling='no', 
-		// src='https://www.hikingproject.com/widget?v=3&map=1&type=trail&id="+trailsId+"&x=-12333477&y=5431238&z=6';
+	    const trailsId = response.trails[i].id;
+
+	    const trailName = response.trails[i].name;
+	    const trailURL = response.trails[i].url;
+	    console.log(trailURL);
+
+	    const trailsFrame = $("<iframe>");
+	    $(trailsFrame).attr("src", trailURL);
+	    $(trailsDiv).append(trailURL);
+
+
+	 //    const trailsFrameTag = $("<iframe>");
+		// $(trailsFrameTag).attr('src', "https://www.hikingproject.com/widget?v=3&map=1&type=trail&id="+trailsId+"&x=-12333477&y=5431238&z=6');
+		// $(trailsFrameTag).addClass("trails-frame");
 	    
-	    const trailsFrameTag = $("<iframe"+trailsFrameURL+">");
-	    $(trailsDiv).append(trailsFrameTag);
+	    // $(trailsDiv).append(trailsFrameTag);
 	    $("#trails-hold").append(trailsDiv);
 	  	}
 	    
