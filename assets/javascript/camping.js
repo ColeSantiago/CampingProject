@@ -1,8 +1,6 @@
 $(document).ready(function() {
 
-    let longArray = [];
-
-    let latArray = [];
+    
 
 // array of states and abbrivs
 	const stateArr = [
@@ -61,22 +59,30 @@ $(document).ready(function() {
     }).done(response => {
     	
     	window.res = response;
+    		console.log(response);
 
 
     		let name = $(res).find('result').each(function(r) { 
 
+
     		let nameTwo = $(this).attr('facilityName');
 
     		let lat = $(this).attr('latitude');
+    		// console.log(lat);
     		let long = $(this).attr('longitude');
+    		// console.log(long);
 
     		let campArray = [];
+    		let longArray = [];
+    		let latArray = [];
 
     		longArray.push(long);
     		latArray.push(lat);
     		campArray.push(nameTwo);
 
     		console.log(campArray);
+    		console.log(longArray);
+    		console.log(latArray);
     		
 
 
@@ -88,12 +94,13 @@ $(document).ready(function() {
 	    		campButtons.addClass('camp-button');
 
 	    		campButtons.attr('data-camp', campArray[i]);
-
-	    		campButtons.attr('data-lat', latArray[i]);
-	    		console.log(latArray[i]);
+	    		console.log(campArray[i]);
 
 	    		campButtons.attr('data-long', longArray[i]);
 	    		console.log(longArray[i]);
+
+	    		campButtons.attr('data-lat', latArray[i]);
+	    		console.log(latArray[i]);
 
 	    		campButtons.text(campArray[i]);
 
@@ -101,17 +108,25 @@ $(document).ready(function() {
 
 	    		campName.append(campButtons);
 
+	    	}
+
 	    		
 
 
-			$(document).on('click', '.camp-button', function(){
+			$(document).on('click', '.camp-button', function(){ 
 
+				// console.log($(this).attr('data-long'));
+				// console.log($(this).attr('data-lat'));
+				
 
 						// map
+
 			    		mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
 						var map = new mapboxgl.Map({
 						container: 'map',
-						style: 'mapbox://styles/mapbox/outdoors-v10'
+						style: 'mapbox://styles/mapbox/outdoors-v10',
+						center: [$(this).attr('data-long'), $(this).attr('data-lat')],
+						zoom: 5
 						});
 
 						let markerImg = new Image();
@@ -120,42 +135,60 @@ $(document).ready(function() {
 			    		markerImg.style.width = '30px';
 
 						let marker = new mapboxgl.Marker(markerImg)
-						.setLngLat([longArray[i], latArray[i]])
-						.addTo(map)
+						.setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
+						.addTo(map)						
 
+						// map plus minus button
 						map.addControl(new mapboxgl.NavigationControl());
+
+						// map popup message
+						var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+						var popupOffsets = {
+						 'top': [0, 0],
+						 'top-left': [0,0],
+						 'top-right': [0,0],
+						 'bottom': [0, -markerHeight],
+						 'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+						 'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+						 'left': [markerRadius, (markerHeight - markerRadius) * -1],
+						 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+						 };
+						var popup = new mapboxgl.Popup({offset:popupOffsets})
+						  .setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
+						  .setHTML($(this).attr('data-camp'))
+						  .addTo(map);
 
 						
 						// end map
 
 						// weather
-						const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latArray[i] + "&lon=" + longArray[i] + 
-			    		"&APPID=187fb301a3565644c00135af35769e08";
+						// const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
+			   //  		"&APPID=187fb301a3565644c00135af35769e08";
 			    		
 
-				    	$.ajax({
-				    		url: queryURLWeather,
-				    		method: "GET"
-				    	}).done(function(weatherResponse) {
+				  //   	$.ajax({
+				  //   		url: queryURLWeather,
+				  //   		method: "GET"
+				  //   	}).done(function(weatherResponse) {
 
-				    		console.log(weatherResponse);
+				  //   		// console.log(weatherResponse);
 
-				    		let tempFar = weatherResponse.list[0].main.temp * 9/5 - 459.67;
-				    		let tempFarRounded = Math.floor(tempFar);
+				  //   		let tempFar = weatherResponse.list[0].main.temp * 9/5 - 459.67;
+				  //   		let tempFarRounded = Math.floor(tempFar);
 
-				    		const weatherMain = $('#weather-temp');
-				    		weatherMain.text('Temperature: ' + tempFarRounded + ' degrees F');
+				  //   		const weatherMain = $('#weather-temp');
+				  //   		weatherMain.text('Temperature: ' + tempFarRounded + ' degrees F');
 
-				    		const weatherDescription = $('#weather-description');
-				    		weatherDescription.text(weatherResponse.list[0].weather[0].description);
-				    	})
+				  //   		const weatherDescription = $('#weather-description');
+				  //   		weatherDescription.text(weatherResponse.list[0].weather[0].description);
+				  //   	})
 
 				    	
 				    	// end weather		
 				
 				})
 
-			}
+			})
 
 		})
 
@@ -173,4 +206,4 @@ $(document).ready(function() {
 
 	
 // closing tag for document ready
-});
+
