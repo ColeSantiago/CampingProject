@@ -120,7 +120,8 @@ body{
     display: none; 
 }
 
-#weather-temp, 
+#weather-temp,
+#camp-detail, 
 #weather-description {
 	background-color: white;
 

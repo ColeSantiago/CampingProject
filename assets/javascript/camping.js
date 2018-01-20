@@ -38,6 +38,9 @@ $(document).ready(function() {
 	//without any input and we return the response
 	$(".stateName").on('click', function(){
 		
+		let campName = $('#camp-name');
+		campName.empty();
+		
 		let abbr = $(this).val();
 
 		console.log(abbr);
@@ -59,8 +62,7 @@ $(document).ready(function() {
     }).done(response => {
     	
     	window.res = response;
-    		console.log(response);
-
+    	console.log(response);
 
     		let name = $(res).find('result').each(function(r) { 
 
@@ -71,19 +73,29 @@ $(document).ready(function() {
     		// console.log(lat);
     		let long = $(this).attr('longitude');
     		// console.log(long);
+    		let photo = $('<img>')
+    		photo.addClass('facility-photo')
+    		photo.attr('src', $(this).attr('facilityPhoto'))
+
+    		let facilityId = $(this).attr('facilityID');
+    		
+
+    		let contractId = $(this).attr('contractID');
+    		
+
+
 
     		let campArray = [];
     		let longArray = [];
     		let latArray = [];
+    		let facilityArray = [];
+    		let contractArray = [];
 
     		longArray.push(long);
     		latArray.push(lat);
     		campArray.push(nameTwo);
-
-    		console.log(campArray);
-    		console.log(longArray);
-    		console.log(latArray);
-    		
+    		facilityArray.push(facilityId);
+    		contractArray.push(contractId);
 
 
     		// adding to the html
@@ -94,30 +106,34 @@ $(document).ready(function() {
 	    		campButtons.addClass('camp-button');
 
 	    		campButtons.attr('data-camp', campArray[i]);
-	    		console.log(campArray[i]);
 
 	    		campButtons.attr('data-long', longArray[i]);
-	    		console.log(longArray[i]);
-
+	    		
 	    		campButtons.attr('data-lat', latArray[i]);
-	    		console.log(latArray[i]);
+
+	    		campButtons.attr('data-facility', facilityArray[i]);
+
+	    		campButtons.attr('data-contract', contractArray[i]);
+	    		
 
 	    		campButtons.text(campArray[i]);
 
-	    		let campName = $('#camp-name');	
+	    			
 
 	    		campName.append(campButtons);
 
 	    	}
 
+	    })
+
+    })
+
+})
+
 	    		
 
 
-			$(document).on('click', '.camp-button', function(){ 
-
-				// console.log($(this).attr('data-long'));
-				// console.log($(this).attr('data-lat'));
-				
+			$(document).on('click', '.camp-button', function(){ 				
 
 						// map
 
@@ -126,7 +142,7 @@ $(document).ready(function() {
 						container: 'map',
 						style: 'mapbox://styles/mapbox/outdoors-v10',
 						center: [$(this).attr('data-long'), $(this).attr('data-lat')],
-						zoom: 5
+						zoom: 6
 						});
 
 						let markerImg = new Image();
@@ -162,39 +178,73 @@ $(document).ready(function() {
 						// end map
 
 						// weather
-						// const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
-			   //  		"&APPID=187fb301a3565644c00135af35769e08";
+						const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
+			    		"&APPID=187fb301a3565644c00135af35769e08";
 			    		
 
-				  //   	$.ajax({
-				  //   		url: queryURLWeather,
-				  //   		method: "GET"
-				  //   	}).done(function(weatherResponse) {
+				    	$.ajax({
+				    		url: queryURLWeather,
+				    		method: "GET"
+				    	}).done(function(weatherResponse) {
 
-				  //   		// console.log(weatherResponse);
+				    		// console.log(weatherResponse);
 
-				  //   		let tempFar = weatherResponse.list[0].main.temp * 9/5 - 459.67;
-				  //   		let tempFarRounded = Math.floor(tempFar);
+				    		let tempFar = weatherResponse.list[0].main.temp * 9/5 - 459.67;
+				    		let tempFarRounded = Math.floor(tempFar);
 
-				  //   		const weatherMain = $('#weather-temp');
-				  //   		weatherMain.text('Temperature: ' + tempFarRounded + ' degrees F');
+				    		const weatherMain = $('#weather-temp');
+				    		weatherMain.text('Temperature: ' + tempFarRounded + ' degrees F');
 
-				  //   		const weatherDescription = $('#weather-description');
-				  //   		weatherDescription.text(weatherResponse.list[0].weather[0].description);
-				  //   	})
+				    		const weatherDescription = $('#weather-description');
+				    		weatherDescription.text(weatherResponse.list[0].weather[0].description);
+				    	})
 
 				    	
-				    	// end weather		
+				    	// end weather	
+
+				    	
+
+				    	const queryURL = "http://api.amp.active.com/camping/campground/details?contractCode=" + $(this).attr('data-contract') + "&parkId=" + $(this).attr('data-facility') + "&api_key=8av4h3s7ecqejs3gbhcj6q6h";
+						const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
+
+
+					    $.ajax({
+					    	url: proxyUrl + queryURL,
+					    	method: "GET",
+					    	headers:{
+					    		authorization: 'Bearer ' + '8av4h3s7ecqejs3gbhcj6q6h'
+
+					    	}
+					    }).done(response => {
+					    	
+					    	window.res = response;
+					    		console.log(response);
+
+					    		let detail = $(res).find('detailDescription').each(function(r) {
+					    			console.log($(this).attr('description'));
+					    			console.log($(this).attr('drivingDirection'));
+
+
+
+					    			let detailTwo = $(this).attr('description');
+					    			let campDetail = $('#camp-detail');
+					    			campDetail.empty();
+					    			campDetail.append(detailTwo);
+
+					    		})
+
+					    	})
+
 				
 				})
 
-			})
+			
 
-		})
+		
 
-    })
+    
  		
-  })
+  
   
 	
 	//save for later allows to show allows to clear the page without changing files
@@ -206,4 +256,4 @@ $(document).ready(function() {
 
 	
 // closing tag for document ready
-
+});
