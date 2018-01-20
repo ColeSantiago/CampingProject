@@ -1,99 +1,86 @@
 body{
-	background-image: url(../images/background.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
 }
 #header{
-	border: 2px solid green;
-	display: flex;
-	justify-content: center;
-	padding: 10px;
-	padding-top: 20px;
-	font-size: 38px;
-	color: white;
-	background-color: green;
-	opacity: 0.9;
+    border: 2px solid green;
+    display: flex;
+    justify-content: center;
+    font-size: 38px;
+    color: white;
+    background-color: green;
+    opacity: 0.9;
 }
 #mainbodyDiv{
-	display: flex;
-	justify-content: center;
-	margin-top: 25px;
-	margin-left: 150px;
-	clear: both;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-left: 150px;
+    clear: both;
 }
 #container{
-	width: 750px;
-	height: 400px;
-	margin-right: 150px;
-	overflow: scroll;
+    width: 750px;
+    height: 400px;
+    margin-right: 150px;
+    overflow: scroll;
 }
 #menu{
-	height: 50px;
-	width: 100%;
-	float: left;
-	padding: 0px;
-	margin-bottom: 30px;
-	background-color: green;
-	color: white;
-	opacity: 0.9;
-	border-bottom: solid 2px white;
-	box-shadow: 0px 8px 5px #3c5221;
+    height: 50px;
+    width: 100%;
+    float: left;
+    padding: 0px;
+    margin-bottom: 30px;
+    background-color: green;
+    color: white;
+    border-bottom: solid 2px white;
+    box-shadow: 0px 4px 5px #3c5221;
 }
-
 #menu > ul {
-	margin-top: 20px;
-	display: flex;
-	justify-content: center;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
 }
-
 #menu > ul > li{
-	font-size: 20px;
-	display: inline;
-	text-transform: uppercase;
-	margin-left: 50px;
-	letter-spacing: 1px;
-	position: relative;
+    font-size: 20px;
+    display: inline;
+    text-transform: uppercase;
+    margin-left: 50px;
+    letter-spacing: 1px;
+    position: relative;
 }
-
 #menu > ul > li:hover {
-	color: white;
+    color: white;
 }
-
 #menu > ul > li::after {
-	content: '';
-	display: block;
-	height: 3px;
-	background-color: white;
-	margin-top: 2px;
-
-	bottom: 0;
-	width: 0%;
-
-	transition: all ease-in-out 350ms;
+    content: '';
+    display: block;
+    height: 3px;
+    background-color: white;
+    margin-top: 2px;
+    bottom: 0;
+    width: 0%;
+    transition: all ease-in-out 350ms;
 }
-
 #menu > ul > li:hover::after {
-	width: 100%;
+    width: 100%;
 }
-
 #prep{
-	border: 2px solid white;
-	width: 800px;
-	height: 300px;
-	margin: 0 auto;
-	margin-top: 40px;
-	padding: 10px;
-	color: white;
+    border: 2px solid white;
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding: 10px;
+    color: white;
 }
 #prep > h2{
-	margin: 10px;
-	padding: 5px;
+    margin: 10px;
+    padding: 5px;
 }
 #prep > p{
-	margin: 15px;
+    margin: 15px;
 }
 #emergencyDiv{
-	display: none;
+    display: none;
 }
 .stateDiv{
     width: 720px;
@@ -103,20 +90,84 @@ body{
     justify-content: center;
 }
 .stateName{
-	font-size: 24px;
-	width: 100%;
-	background-color: green;
-	color: white;
-	border-radius: 6px;
-	opacity: 0.8;
+    font-size: 24px;
+    width: 100%;
+    background-color: green;
+    color: white;
+    border-radius: 6px;
+    opacity: 0.8;
 }
 .stateName:hover{
-	opacity: 1;
+    opacity: 1;
 }
-
-
-
 ::-webkit-scrollbar { 
     display: none; 
 }
+#weather-main, 
+#weather-description {
+    background-color: white;
+}
+.camp-button{
+	margin: 5px;
+	border-radius: 5px;
+    background-color: forestgreen;
+    color: white;
+    padding: 5px;
+}
+#buttonContainer {
+	max-height: 100%;
+	overflow: auto;
+}
+.marginTop{
+	margin-top: 30px;
+}
+.contentContainer{
+	width: 100%;
+	background-size: cover;
+}
+#topContainer{
+	background-image: url("../images/background.jpg");
+	height: 400px;
+	width: 100%;
+	background-size: cover;
+}
+#footer{
+	background-image: url("../images/background.jpg");
+	width: 100%;
+	background-size: cover;
+}
+#eDiv{
+	background-color: lavender;
+	width: 100%;
+}
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid lightgreen; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+.arrow{
+	position: relative;
+    top: 1px;
+    right: 50px;
+    color: green;
+    opacity: 0.8;
+    font-size: 35px;
+}
+.welcomeDiv{
+	text-align: center;
+	color: white;
+}
+#draggable2{
+	width: 100px; height: 100px; 
+}
+#droppable{
+	width: 150px; height: 150px; 
+}
 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
