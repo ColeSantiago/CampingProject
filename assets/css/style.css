@@ -1,43 +1,74 @@
 body{
-	background-image: url(../images/background.jpg);
+	height: 100%;
+	background-image: url(../images/topography.png);
+
+}
+
+#bgimg-1, #bgimg-2, #bgimg-3 {
+	position: relative;
+	background-attachment: fixed;
+	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-#header{
-	border: 2px solid green;
-	display: flex;
-	justify-content: center;
-	padding: 10px;
-	padding-top: 20px;
-	font-size: 38px;
-	color: white;
-	background-color: green;
-	opacity: 0.9;
+ 
+ #bgimg-1{
+    background-image: url(../images/background.jpg);
+    height: 100%; 
 }
-#mainbodyDiv{
+
+#bgimg-2{
+	background-image: url(../images/boots_photographed.jpg);
+	min-height: 650px;
+}
+
+#bgimg-3{
+	background-image: url(../images/otter_Cliff.jpg);
+	min-height: 650px;
+}
+
+#header{
+	height: 600px;
+	border: 2px solid green;
+	justify-content: center;
+	padding: 50px;
+	padding-top: 250px;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-align: center;
+	font-size: 65px;
+}
+
+#statesDiv{
 	display: flex;
 	justify-content: center;
 	margin-top: 25px;
+	margin-bottom: 25px;
 	margin-left: 150px;
+	opacity: 6.0;
 	clear: both;
 }
+
 #container{
 	width: 750px;
-	height: 400px;
+	height: 700px;
 	margin-right: 150px;
+	border: 2px solid lightgray;
 	overflow: scroll;
 }
+
 #menu{
 	height: 50px;
 	width: 100%;
 	float: left;
 	padding: 0px;
-	margin-bottom: 30px;
+	margin-bottom: 80px;
 	background-color: green;
 	color: white;
 	opacity: 0.9;
-	border-bottom: solid 2px white;
-	box-shadow: 0px 8px 5px #3c5221;
+	z-index: 150;
+	border-bottom: solid 1px white;
+	box-shadow: 0px 5px 5px #3c5221;
 }
 
 #menu > ul {
@@ -53,6 +84,8 @@ body{
 	margin-left: 50px;
 	letter-spacing: 1px;
 	position: relative;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-decoration: none;
 }
 
 #menu > ul > li:hover {
@@ -76,32 +109,79 @@ body{
 	width: 100%;
 }
 
+.stickynavbar{
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	z-index: 100;
+	border-top: 0;
+}
+
 #prep{
-	border: 2px solid white;
+	border: 2px solid lightgray;
 	width: 800px;
-	height: 300px;
+	height:600px;
 	margin: 0 auto;
 	margin-top: 40px;
+	margin-bottom: 40px;
 	padding: 10px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 	color: white;
 }
+
 #prep > h2{
 	margin: 10px;
 	padding: 5px;
 }
+
 #prep > p{
 	margin: 15px;
 }
-#emergencyDiv{
+
+.adventure  {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.adventure div.caption {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+
+#nonprofitDiv{
 	display: none;
 }
+
+#nonprofit{
+	border: 2px solid lightgray;
+	width: 800px;
+	height:600px;
+	margin: 0 auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	padding: 10px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	color: white;
+}
+
 .stateDiv{
     width: 720px;
     height: 100px;
     margin: 10px;
     display: flex;
     justify-content: center;
+    box-shadow: 0px 3px 5px #3c5221;
 }
+
 .stateName{
 	font-size: 24px;
 	width: 100%;
@@ -109,7 +189,9 @@ body{
 	color: white;
 	border-radius: 6px;
 	opacity: 0.8;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+
 .stateName:hover{
 	opacity: 1;
 }
@@ -119,4 +201,15 @@ body{
 ::-webkit-scrollbar { 
     display: none; 
 }
+
+#footer {
+	background-color: black;
+		text-align: center;
+		clear: both;
+		color: white;
+		padding: 10px 0;
+		clear: both;
+		font-size: 12px;
+		border-top: 2px solid green;
+} 
 
