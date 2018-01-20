@@ -1,8 +1,38 @@
+<<<<<<< HEAD
 $(".contentContainer").css("min-height", $(window).height());
 $(".arrow").hide();
 $(document).ready(function() {
     let longArray = [];
     let latArray = [];
+=======
+//fixed navbar
+
+	$(document).ready(function() {
+		// grab the initial top offset of the navigation 
+		var stickyNavTop = $('#menu').offset().top;
+		   	
+		// our function that decides weather the navigation bar should have "fixed" css position or not.
+		var stickyNav = function(){
+			var scrollTop = $(window).scrollTop(); // our current vertical position from the top
+			         
+			// if we've scrolled more than the navigation, change its position to fixed to stick to top,
+			// otherwise change it back to relative
+			if (scrollTop > stickyNavTop) { 
+				$('#menu').addClass('stickynavbar');
+			} 
+			else {
+				$('#menu').removeClass('stickynavbar'); 
+			}
+		};
+
+			stickyNav();
+			// and run it again every time you scroll
+			$(window).scroll(function() {
+				stickyNav();
+			});
+		});
+
+>>>>>>> 27454810505d796491f5b78e615a3aaf5ce8f611
 // array of states and abbrivs
     const stateArr = [
     {state:"Alabama", abbr: "AL"}, {state:"Alaska", abbr: "AK"},{state:"Arizona", abbr: "AZ"},{state:"Arkansas", abbr: "AR"},
@@ -132,6 +162,15 @@ $(document).ready(function() {
     $('#home').on('click', function(){
         $('#wholeContainer').show();
     })
+<<<<<<< HEAD
+=======
+   })
+
+	
+
+	
+
+>>>>>>> 27454810505d796491f5b78e615a3aaf5ce8f611
 
     
     	//recycling
