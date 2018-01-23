@@ -38,6 +38,7 @@ $(document).ready(function() {
 						}), 'top-left');
 
 						// scrolls to the location of your mouse on the map
+						if (map.mouseenter) {
 						  window.onscroll = function() {
 						    var chapterNames = Object.keys(chapters);
 						    for (var i = 0; i < chapterNames.length; i++) {
@@ -47,6 +48,9 @@ $(document).ready(function() {
 						            break;
 						        }
 						    }
+
+						}
+						
 						};
 
 						// map plus minus button
