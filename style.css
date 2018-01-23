@@ -1,0 +1,19 @@
+#test-box{
+	border: solid red 6px;
+	height: auto;
+	width: auto;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+#test-button{
+	color: blue;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+#trail-button{
+	color: blue;
+	margin-left: 10px;
+	margin-top: 10px;
+}

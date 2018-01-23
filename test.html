@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Carousel Test</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+	<div id="button-box">
+		<button type="button" id="test-button">Colorado</button>
+	</div>
+
+	<div id="test-box">
+	</div>
+
+	<div id="trail-box">
+		<button type="button" id="trail-button">View next trail</button>
+	</div>
+
+	<script>
+			const hikingQueryURL = "https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200209593-2d1e8288276f62fa07701a4f0905a28f";
+
+			$("#test-button").on('click', function(){
+
+				$.ajax({
+				      url: hikingQueryURL,
+				      method: 'GET'
+				    }).done(function(response){
+
+					for (let i = 0; i < response.trails.length; i++){
+						
+						let newArray = [];
+
+						newArray.push(response.trails[i].id);
+
+						// console.log(newArray);
+
+						for (let i = 0; i < newArray.length; i++){
+
+							const trailImg = $('<div>')
+
+							trailImg.text(newArray[i])
+
+							$("#test-box").append(trailImg);
+						}
+						}
+			})
+			})
+
+		</script>
+
+</body>
+</html>
