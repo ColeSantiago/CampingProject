@@ -1,6 +1,58 @@
 $(document).ready(function() {
 
-    
+						// map on load
+
+						mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
+						var map = new mapboxgl.Map({
+						container: 'map',
+						style: 'mapbox://styles/mapbox/outdoors-v10',
+						center: [-103.579102, 48.365374],
+						zoom: 2
+						});
+
+
+						// adds hillshading to the map
+						  map.on('load', function () {
+						    map.addSource('dem', {
+						        "type": "raster-dem",
+						        "url": "mapbox://mapbox.terrain-rgb"
+						    });
+						    map.addLayer({
+						        "id": "hillshading",
+						        "source": "dem",
+						        "type": "hillshade"
+						    }, 'waterway-river-canal-shadow');
+						});
+
+						  // finds the users location
+						map.addControl(new mapboxgl.GeolocateControl({
+						    positionOptions: {
+						        enableHighAccuracy: true
+						    },
+						    trackUserLocation: true
+						}));
+	
+						// adds directions section
+						map.addControl(new MapboxDirections({
+						    accessToken: mapboxgl.accessToken
+						}), 'top-left');
+
+						// scrolls to the location of your mouse on the map
+						  window.onscroll = function() {
+						    var chapterNames = Object.keys(chapters);
+						    for (var i = 0; i < chapterNames.length; i++) {
+						        var chapterName = chapterNames[i];
+						        if (isElementOnScreen(chapterName)) {
+						            setActiveChapter(chapterName);
+						            break;
+						        }
+						    }
+						};
+
+						// map plus minus button
+						map.addControl(new mapboxgl.NavigationControl());
+
+					// end map  
 
 // array of states and abbrivs
 	const stateArr = [
@@ -37,7 +89,7 @@ $(document).ready(function() {
 	//with the value abbr we can then access the api when the user clicks
 	//without any input and we return the response
 	$(".stateName").on('click', function(){
-		
+
 		let campName = $('#camp-name');
 		campName.empty();
 		
@@ -49,8 +101,6 @@ $(document).ready(function() {
 	const queryURL = "https://api.amp.active.com/camping/campgrounds/?pstate=" + abbr
 	+ "&json=true&api_key=8av4h3s7ecqejs3gbhcj6q6h";
 	const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
-
-
 
     $.ajax({
     	url: proxyUrl + queryURL,
@@ -66,39 +116,34 @@ $(document).ready(function() {
 
     		let name = $(res).find('result').each(function(r) { 
 
-
     		let nameTwo = $(this).attr('facilityName');
 
     		let lat = $(this).attr('latitude');
     		// console.log(lat);
     		let long = $(this).attr('longitude');
     		// console.log(long);
-    		let photo = $('<img>')
-    		photo.addClass('facility-photo')
-    		photo.attr('src', $(this).attr('facilityPhoto'))
-
+    		const imgURL = 'http://www.reserveamerica.com/' + $(this).attr('faciltyPhoto');
+    		    		
     		let facilityId = $(this).attr('facilityID');
     		
-
     		let contractId = $(this).attr('contractID');
-    		
-
-
 
     		let campArray = [];
     		let longArray = [];
     		let latArray = [];
     		let facilityArray = [];
     		let contractArray = [];
+    		let photoArray = [];
 
     		longArray.push(long);
     		latArray.push(lat);
     		campArray.push(nameTwo);
     		facilityArray.push(facilityId);
     		contractArray.push(contractId);
+    		photoArray.push(imgURL);
+    		// console.log(photoArray);
 
-
-    		// adding to the html
+    		// adding camp buttons to the html when the state is clicked
     		for (let i = 0; i < campArray.length; i++) {
 
 	    		const campButtons = $('<button>');
@@ -114,11 +159,10 @@ $(document).ready(function() {
 	    		campButtons.attr('data-facility', facilityArray[i]);
 
 	    		campButtons.attr('data-contract', contractArray[i]);
+
+	    		campButtons.attr('data-photo', photoArray[i]);
 	    		
-
 	    		campButtons.text(campArray[i]);
-
-	    			
 
 	    		campName.append(campButtons);
 
@@ -130,32 +174,27 @@ $(document).ready(function() {
 
 })
 
-	    		
+			$(document).on('click', '.camp-button', function(){ 
 
+						// map when you select a campsite
 
-			$(document).on('click', '.camp-button', function(){ 				
-
-						// map
-
-			    		mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
-						var map = new mapboxgl.Map({
-						container: 'map',
-						style: 'mapbox://styles/mapbox/outdoors-v10',
-						center: [$(this).attr('data-long'), $(this).attr('data-lat')],
-						zoom: 6
-						});
-
+						// marker image and adding the marker to the page
+						let campPhoto = $(this).attr('data-photo')
 						let markerImg = new Image();
-						markerImg.src = 'assets/images/marker.png';
-						markerImg.style.height = '30px';
-			    		markerImg.style.width = '30px';
+						markerImg.src = campPhoto;
+						markerImg.style.height = '50px';
+			    		markerImg.style.width = '50px';
+			    		markerImg.style.borderRadius = '25px';
 
 						let marker = new mapboxgl.Marker(markerImg)
 						.setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
-						.addTo(map)						
+						.addTo(map)								
 
-						// map plus minus button
-						map.addControl(new mapboxgl.NavigationControl());
+						// flys to the location of the campsite
+						map.flyTo({
+						        center: [$(this).attr('data-long'), $(this).attr('data-lat')],
+						        zoom: 11
+						    })
 
 						// map popup message
 						var markerHeight = 50, markerRadius = 10, linearOffset = 25;
@@ -174,20 +213,67 @@ $(document).ready(function() {
 						  .setHTML($(this).attr('data-camp'))
 						  .addTo(map);
 
-						
+					// end map
+
+					const trailsqueryURL = "https://www.hikingproject.com/data/get-trails?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
+				    "&maxDistance=5&maxResults=5&key=200209593-2d1e8288276f62fa07701a4f0905a28f"
+
+				     $.ajax({
+				        url: trailsqueryURL,
+				        method: "GET",
+				    	}).done(response => {
+				    		for (let i = 0; i < response.trails.length; i++){
+				    	let trailLat = response.trails[i].latitude;
+				    	let trailLong = response.trails[i].longitude;
+				    	let trailName = response.trails[i].name;
+				    	// const url = response.trails[i].url;
+				    	// const iframe = $("<iframe height='400px' width='400px'>");
+				    	// const link = $(iframe).attr('src', url);
+				    	// $('.trailsDiv').append(link);
+   	
+   							// adds trail locations to the map
+					    	let trailImg = new Image('id="trailDot');
+							trailImg.src = 'assets/images/dot.png';
+							trailImg.style.height = '20px';
+				    		trailImg.style.width = '20px';
+				    		trailImg.style.borderRadius = '25px';	
+
+							let marker = new mapboxgl.Marker(trailImg)
+							.setLngLat([trailLong, trailLat])
+							.addTo(map)
+							
+							var markerHeight = 10, markerRadius = 10, linearOffset = 25;
+							var popupOffsets = {
+							 'top': [0, 0],
+							 'top-left': [0,0],
+							 'top-right': [0,0],
+							 'bottom': [0, -markerHeight],
+							 'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+							 'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+							 'left': [markerRadius, (markerHeight - markerRadius) * -1],
+							 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+							 };
+							var popup = new mapboxgl.Popup({offset:popupOffsets})
+							  .setLngLat([trailLong, trailLat])
+							  .setHTML('Trail: ' + trailName)
+							  .addTo(map);
+
 						// end map
+
+				    }    
+
+				})
 
 						// weather
 						const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
 			    		"&APPID=187fb301a3565644c00135af35769e08";
 			    		
-
 				    	$.ajax({
 				    		url: queryURLWeather,
 				    		method: "GET"
 				    	}).done(function(weatherResponse) {
 
-				    		// console.log(weatherResponse);
+				    		console.log(weatherResponse);
 
 				    		let tempFar = weatherResponse.list[0].main.temp * 9/5 - 459.67;
 				    		let tempFarRounded = Math.floor(tempFar);
@@ -198,11 +284,8 @@ $(document).ready(function() {
 				    		const weatherDescription = $('#weather-description');
 				    		weatherDescription.text(weatherResponse.list[0].weather[0].description);
 				    	})
-
-				    	
+ 	
 				    	// end weather	
-
-				    	
 
 				    	const queryURL = "http://api.amp.active.com/camping/campground/details?contractCode=" + $(this).attr('data-contract') + "&parkId=" + $(this).attr('data-facility') + "&api_key=8av4h3s7ecqejs3gbhcj6q6h";
 						const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
@@ -218,13 +301,11 @@ $(document).ready(function() {
 					    }).done(response => {
 					    	
 					    	window.res = response;
-					    		console.log(response);
+					    		// console.log(response);
 
 					    		let detail = $(res).find('detailDescription').each(function(r) {
-					    			console.log($(this).attr('description'));
-					    			console.log($(this).attr('drivingDirection'));
-
-
+					    			// console.log($(this).attr('description'));
+					    			// console.log($(this).attr('drivingDirection'));
 
 					    			let detailTwo = $(this).attr('description');
 					    			let campDetail = $('#camp-detail');
@@ -233,18 +314,9 @@ $(document).ready(function() {
 
 					    		})
 
-					    	})
-
-				
+					    	})			
 				})
-
-			
-
 		
-
-    
- 		
-  
   
 	
 	//save for later allows to show allows to clear the page without changing files
