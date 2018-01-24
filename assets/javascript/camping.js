@@ -132,7 +132,7 @@ $(".arrow2").hide();
                     let lat = $(this).attr('data-lat');
                     let long = $(this).attr('data-long');
                     const queryURL = "https://www.hikingproject.com/data/get-trails?lat=" + lat + "&lon=" + long + 
-                        "&maxDistance=5&maxResults=3&key=200209593-2d1e8288276f62fa07701a4f0905a28f"
+                        "&maxDistance=10&maxResults=3&key=200209593-2d1e8288276f62fa07701a4f0905a28f"
                      $.ajax({
                         url: queryURL,
                         method: "GET",
@@ -140,14 +140,11 @@ $(".arrow2").hide();
                           console.log(response);
                             for (let i = 0; i < response.trails.length; i++){
                         console.log(response.trails[i]);
-                        const url1 = response.trails[0].url;
-                        const url2 = response.trails[1].url;
-                        const url3 = response.trails[2].url;
+                        const url = response.trails[i].url;
 
-                        $('#slide1').attr("src", url1);
-                        $('#slide2').attr("src", url2);
-                        $('#slide3').attr("src", url3);
-                    }
+                        $('#slide'+ (i + 1)).attr("src", url);
+                            }
+                            $('.carousel').carousel({interval: 1000})
                         
                         })
                     // const site = "https://www.greatoutdoorvacations.com/?q="+ campsite + "&" + lat + "&" + long;
