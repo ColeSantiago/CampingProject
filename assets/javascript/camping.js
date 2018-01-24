@@ -63,6 +63,7 @@ $(document).ready(function() {
 	span.onclick = function() { 
 	  modal.style.display = "none";
 	}
+	// end modal
 
 		$(".arrow").hide();
 
@@ -89,7 +90,7 @@ $(document).ready(function() {
                 stickyNav();
             });
 
-						// map on load
+			// map on load
 
 			mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
 			var map = new mapboxgl.Map({
