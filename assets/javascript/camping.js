@@ -105,8 +105,12 @@
 	  captionText.innerHTML = this.alt;
 	  // const id = $(this).attr("id")
 	  const id = document.getElementById(this.id);
-	  // let tipCardsItems = console.log(tipCards.backpack.id);
+	  let tipCardsItems = tipCards[this.id];
 	  console.log(id);
+	  console.log(tipCardsItems);
+
+	  const modalImage = document.querySelector('.w3s-modal-content');
+	  modalImage.src = tipCards[this.id].longImage;
 
 
 	
