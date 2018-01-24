@@ -59,94 +59,54 @@
 	let modalImg = document.getElementById("img01");
 	let captionText = document.getElementById("caption");
 
-// Jquery that needs to be fixed
+//Image Objects
 	const tipCards = {
 	  'backpack': {
-	    shortImage: 'assets/images/camp-prep-1.jpg',
 	    longImage: 'assets/images/camp-prep-1-long.jpg',
-	    currentState: 'short',
-	    id: 'backpack',
 	  },
 	  'bear': {
-	    shortImage: 'assets/images/camp-prep-2.jpg',
 	    longImage: 'assets/images/camp-prep-2-long.png',
-	    currentState: 'short',
-	    id:'bear',
 	  },
 	  'mosquito': {
-	  	shortImage: 'assets/images/camp-prep-3.jpg',
 	  	longImage: 'assets/images/camp-prep-3-long.jpg',
-	  	currentState: 'short',
-	  	id: 'mosquito',
 	  },
 	  'hypothermia': {
-	  	shortImage: 'assets/images/camp-prep-4.jpg',
 	  	longImage: 'assets/images/camp-prep-4-long.jpg',
-	  	currentState: 'short',
-	  	id: 'hypothermia',
 	  },
 	  'spiderbites': {
-	  	shortImage: 'assets/images/camp-prep-5.jpg',
 	  	longImage: 'assets/images/camp-prep-5-long.jpg',
-	  	currentState: 'short',
-	  	id: 'spiderbites',
 	  },
 	  'campfire': {
-	  	shortImage: 'assets/images/camp-prep-6.jpg',
 	  	longImage: 'assets/images/camp-prep-6-long.jpg',
-	  	currentState: 'short',
-	  	id: 'campfire',
+	  },
+	  'first-aid': {
+	  	longImage: 'assets/images/camp-prep-7-long.jpg',
+	  },
+	  'shelter': {
+	  	longImage: 'assets/images/camp-prep-8-long.jpg',
+	  },
+	  'tent': {
+	  	longImage: 'assets/images/camp-prep-9-long.png',
+	  },
+	  'trapping': {
+	  	longImage: 'assets/images/camp-prep-10-long.jpg',
 	  },
 	};
 
+// Opens modal and calls on object's longImage property.
 	$(".tip-card").on("click", function() {
-	  modal.style.display = "block";
-	  // modalImg.src = this.src;
-	  captionText.innerHTML = this.alt;
-	  // const id = $(this).attr("id")
 	  const id = document.getElementById(this.id);
 	  let tipCardsItems = tipCards[this.id];
+	// Console logging object info
 	  console.log(id);
 	  console.log(tipCardsItems);
 
+	  modal.style.display = "block";
 	  const modalImage = document.querySelector('.w3s-modal-content');
 	  modalImage.src = tipCards[this.id].longImage;
+	  captionText.innerHTML = this.alt;
 
-
-	
-
-	  // if (tipCard.currentState === 'short') {
-	  //   $(this).find('img').attr('src', longImages);
-	  //   tipCards.currentState = 'long';
-	  // }
-
-	  // else {
-	  //   $(this).find('img').attr('src', shortImage);
-	  //   tipCard.currentState = 'short';
-	  //  }
 	  });
-
-
-
-	//  var shortCards = document.getElementsByClassName("tip-card");
-
-	// shortCards.onclick = function(){
-	//   consoleTest()
-	//   // modal.style.display = "block";
-	// }
-
-// Code referenced from w3schools.com (slightly customized)
-
-	// //Get the image and insert it inside the modal
-	//   var img = document.getElementById("backpack");
-	//   var modalImg = document.getElementById("img01");
-	//   var captionText = document.getElementById("caption");
-	//   img.onclick = function(){
-	//   	console.log("ding");
-	//   	modal.style.display = "block";
- //        modalImg.src = "assets/images/camp-prep-1-long.jpg";
- //        captionText.innerHTML = this.alt;
-	//   }
 
 	// Get the <span> element that closes the modal
 	let span = document.getElementsByClassName("close")[0];

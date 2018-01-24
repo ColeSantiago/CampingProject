@@ -4326,8 +4326,9 @@ tbody.collapse.show {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+/*  border: 1px solid rgba(0, 0, 0, 0.125);*/
+  border-radius: 0.35rem;
+  margin-right: 8px;
 }
 
 .card > hr {
@@ -4485,7 +4486,7 @@ tbody.collapse.show {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 1514px;
+  width: 2684px;
 }
 
 .card-group > .card {
@@ -4509,10 +4510,10 @@ tbody.collapse.show {
     margin-left: 0;
     border-left: 0;
   }
-  .card-group > .card:first-child {
+/*  .card-group > .card:first-child {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-  }
+  }*/
   .card-group > .card:first-child .card-img-top,
   .card-group > .card:first-child .card-header {
     border-top-right-radius: 0;
@@ -4546,9 +4547,9 @@ tbody.collapse.show {
     border-bottom-right-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
   }
-  .card-group > .card:not(:first-child):not(:last-child):not(:only-child) {
+/*  .card-group > .card:not(:first-child):not(:last-child):not(:only-child) {
     border-radius: 0;
-  }
+  }*/
   .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-img-top,
   .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-img-bottom,
   .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-header,
