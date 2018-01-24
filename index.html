@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Camp Sites</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
+<html lang="en-us">
+  <head>
+	 <title>Camp Sites</title>
+	 <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
 	
 	<div id="header">
 		<h1>Camping Made Easy</h1>				
@@ -33,11 +34,75 @@
 	
 	</div>
 
+
+  <div id="prepHeader">
+    <h1>How to Be Prepared</h1>
+  </div>
 	<div id="prep">
-		<h2>How to be prepared</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse at laboriosam, magnam enim, amet molestias dicta, excepturi aliquid tenetur dolorem deserunt nemo ad. Labore sapiente accusantium sit quidem odio reiciendis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptatem distinctio ab reprehenderit voluptatibus beatae sapiente eaque odit, ullam id debitis blanditiis, vel veniam culpa, nihil adipisci commodi natus accusamus!</p>
+		<div class="card-group">
+  			<div class="card">
+    			<img class="tip-card" id="backpack" src="assets/images/camp-prep-1.jpg" alt="Backpacking Anatomy">
+    			<div class="card-body">
+      				<h5 class="card-title">Anatomy of a Backpacker</h5>
+      				<p class="card-text">  If you’re more likely to be found rushing down river rapids than taking guided tours to museums and cafes, you may fall into a special category of traveler: the adventure backpacker.</p>
+    			</div>
+  			</div>
+  			<div class="card">
+    			<img class="tip-card" id="bear" src="assets/images/camp-prep-2.jpg" alt="Bear Safety">
+    			<div class="card-body">
+      				<h5 class="card-title">Bear Safety Tips </h5>
+      				<p class="card-text">Bears are fascinating animals but best believe that you don't want to come across one.  Remember, don't ever surprise a bear because it will be more prone to attack!</p>
+    			</div>
+  			</div>
+  			<div class="card">
+    			<img class="tip-card" id="mosquito" src="assets/images/camp-prep-3.jpg" alt="Mosquito Info">
+    			<div class="card-body">
+      				<h5 class="card-title">Are you a Mosquito Magnet?</h5>
+      				<p class="card-text">Are you the sort of person who’s always covered in mosquito bites?</p>
+    			</div>
+    			
+  			</div>
+  			<div class="card">
+    			<img class="tip-card" id="hypothermia" src="assets/images/camp-prep-4.jpg" alt="Hypothermia Survival">
+    			<div class="card-body">
+      				<h5 class="card-title">How to Survive Hypothermia</h5>
+      				<p class="card-text">Ways to keep your core temperature up in cold weather.</p>
+    			</div>
+    		
+  			</div>
+  			<div class="card">
+    			<img class="tip-card" id="spiderbites" src="assets/images/camp-prep-5.jpg" alt="Spider bite Identification">
+    			<div class="card-body">
+      				<h5 class="card-title">Spider bites Guide</h5>
+      				<p class="card-text">Here's a guide on what how to identify a spider bite.</p>
+    			</div>
+  			</div>
+        <div class="card">
+          <img class="tip-card" id="campfire" src="assets/images/camp-prep-6.jpg" alt="Campfire Building">
+          <div class="card-body">
+              <h5 class="card-title">How to Build a Campfire</h5>
+              <p class="card-text">Here's a guide on building a campfire.</p>
+          </div>
+        </div>
+        
+      <!-- The Modal that will popup when an image is clicked -->
+        <div id="myModal" class="w3s-modal">
+        <!-- The Close Button -->
+          <span class="close">&times;</span>
+
+        <!-- Modal Content (The Image) -->
+          <img class="w3s-modal-content" id="img01">
+        <!-- Caption -->
+          <div id="caption"></div>
+        </div>
+		</div>
 	</div>
 
-<script type="text/javascript" src="assets/javascript/camping.js"></script>
-</body>
+
+  <script type="text/javascript" src="assets/javascript/bootstrap.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="assets/javascript/camping.js"></script>
+  </body>
 </html>
