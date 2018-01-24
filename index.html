@@ -10,39 +10,71 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 	<script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css' rel='stylesheet' />
 	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css' type='text/css' />
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css' type='text/css' />
 </head>
 <body>
 
 
-	<div id="header">
-		<h1>Camping Made Easy</h1>				
-	</div>
+	<!-- FIRST BACKGROUND AND HEADER -->
+    <div id="bgimg-1">
+        <header id="header">
+            <div>
+                <h1>Camping Made Easy</h1>
+            <!--     <div id="draggable" class="ui-widget-content">
+                    <img src="assets/images/water.png" height="100px" width="100px">
+                  <p></p>
+                </div>
+                
+                <div id="droppable" class="ui-widget-header">
+                    <img src="assets/images/recycling.png" height="100px" width="100px">
+                  <p></p>
+                </div> -->
+            </div>
+        </header>
+    </div>
 
+    <!-- NAVBAR -->
 
-	<div id="menu">
-		<ul>
-			<li id="home" class="glyphicon glyphicon-home"> Home</li>
-			<li id="camping" class="glyphicon glyphicon-leaf"> Camping-Prep</li>
-			<li id="misc" class="glyphicon glyphicon-tree-conifer"> Miscellaneous</li>
-		</ul>
-	</div>
+    <nav id="menu" class="navbar navbar-default">
+        <ul>
+            <li id="home"> 
+                <a class="glyphicon glyphicon-home" href="#">Home</a>
+            </li>
+            <li id="camping">
+                <a class="glyphicon glyphicon-leaf" href="#"></a>Camping-Prep
+            </li>
+            <li id="misc" class="glyphicon glyphicon-tree-conifer">
+                <a href="#">Miscellaneous</a>
+            </li>
+        </ul>
+    </nav>
 
-<div id="wholeContainer"> 
-	<div id="mainbodyDiv">
-	<!-- States/Citys will be stored here -->
-		<div id="container">	
-
-		</div>
-
-		<div id="emergencyDiv"></div>
-	
-	</div>
+	<div class="container contentContainer marginTop">    
+        <div class="row">
+            <div id="wholeContainer"> 
+                <div id="mainbodyDiv">
+            <!-- States/Citys will be stored here -->
+            <div class="arrow"><span class="glyphicon glyphicon-arrow-left"></span></div>
+           <!--  <div class="arrow2"><span class="glyphicon glyphicon-arrow-left"></span></div> -->
+                    <div id="container">
+                        
+                    </div>
+                </div>
+                <div class="trailsDiv">
+            
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<div id="camp-name"> </div>
 
@@ -52,14 +84,59 @@
 
 	<div id="detail-view"> </div>
 
-	<div class="trailsDiv"> </div>
+	<!-- <div class="trailsDiv"> </div> -->
 
-	<div id="prep">
-		<h2>How to be prepared</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse at laboriosam, magnam enim, amet molestias dicta, excepturi aliquid tenetur dolorem deserunt nemo ad. Labore sapiente accusantium sit quidem odio reiciendis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptatem distinctio ab reprehenderit voluptatibus beatae sapiente eaque odit, ullam id debitis blanditiis, vel veniam culpa, nihil adipisci commodi natus accusamus!</p>
-	</div>
-</div>
+	  <!-- SECOND BACKGROUND -->
+
+    <div id="bgimg-2">
+        <div class="adventure">
+            <div class="caption">
+                Make sure you're all packed
+            </div>
+        </div>
+    </div>
+
+            <!-- CAMPING PREP LIST -->
+
+        <div>
+            <div id="prep">
+            <h2>How to be prepared </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse at laboriosam, magnam enim, amet molestias dicta, excepturi aliquid tenetur dolorem deserunt nemo ad. Labore sapiente accusantium sit quidem odio reiciendis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptatem distinctio ab reprehenderit voluptatibus beatae sapiente eaque odit, ullam id debitis blanditiis, vel veniam culpa, nihil adipisci commodi natus accusamus!
+                </p>
+            </div>
+        </div>
+
+    <!-- THIRD BACKGROUND -->
+
+    <div id="bgimg-3">
+        <div class="adventure">
+            <div class="caption">
+                and enjoy your adventure!
+            </div>
+        </div>
+    </div>
+
+
+    <!-- NONPROFIT SECTION -->
+
+    <div>
+        <div id="nonprofit">
+        
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+
+<footer>
+     <div id="footer">
+                    Copyright &copy; 2018 Project1
+     </div>
+</footer>
+
 
 <script type="text/javascript" src="assets/javascript/camping.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 </html>
