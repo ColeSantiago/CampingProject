@@ -233,13 +233,6 @@ $(document).ready(function() {
 
     };
 
-    $("#donate-link").on("click", function() {
-        $("#mainBodyDiv").hide();
-        $("#container").hide();
-        $("#prep").hide();
-    })
-
-
 	//looping through and displaying each state in the above array as well as
 	//giving it the value of abbr
  function stateDiv(){
@@ -361,7 +354,9 @@ $(document).ready(function() {
 			$(document).on('click', '.camp-button', function(){ 
 
 				$('.camp-button').hide();
-				$('#carouselContainer').css('display', 'block');
+				$('#carouselContainer').css({'display':'flex', 'justify-content': 'center'});
+				
+
 
 						// map when you select a campsite
 
@@ -483,58 +478,6 @@ $(document).ready(function() {
 					    		const weatherDescription0 = $('<p>').text(weatherResponse.list[0].weather[0].description);
 					    		weatherDiv.append(weatherDescription0);
 
-					    		// // day 2 forecast
-					    		// weatherDate8 = $('<p>').text('Date: ' + weatherResponse.list[8].dt_txt);
-					    		// weatherDiv.append(weatherDate8);
-
-					    		// let tempFar8 = weatherResponse.list[8].main.temp * 9/5 - 459.67;
-					    		// let tempFarRounded8 = Math.floor(tempFar8);
-
-					    		// const weatherMain8 = $('<p>').text('Temperature: ' + tempFarRounded8 + ' degrees F');
-					    		// weatherDiv.append(weatherMain8);
-
-					    		// const weatherDescription8 = $('<p>').text(weatherResponse.list[8].weather[0].description);
-					    		// weatherDiv.append(weatherDescription8);
-
-					    		// // day 3 forecast
-					    		// const weatherDate16 = $('<p>').text('Date: ' + weatherResponse.list[16].dt_txt)
-					    		// weatherDiv.append(weatherDate16);
-
-					    		// let tempFar16 = weatherResponse.list[16].main.temp * 9/5 - 459.67;
-					    		// let tempFarRounded16 = Math.floor(tempFar16);
-
-					    		// const weatherMain16 = $('<p>').text('Temperature: ' + tempFarRounded16 + ' degrees F');
-					    		// weatherDiv.append(weatherMain16);
-
-					    		// const weatherDescription16 = $('<p>').text(weatherResponse.list[16].weather[0].description);
-					    		// weatherDiv.append(weatherDescription16);
-
-					    		// // day 4 forecast
-					    		// const weatherDate24 = $('<p>').text('Date: ' + weatherResponse.list[24].dt_txt)
-					    		// weatherDiv.append(weatherDate24);
-
-					    		// let tempFar24 = weatherResponse.list[24].main.temp * 9/5 - 459.67;
-					    		// let tempFarRounded24 = Math.floor(tempFar24);
-
-					    		// const weatherMain24 = $('<p>').text('Temperature: ' + tempFarRounded24 + ' degrees F');
-					    		// weatherDiv.append(weatherMain24);
-
-					    		// const weatherDescription24 = $('<p>').text(weatherResponse.list[24].weather[0].description);
-					    		// weatherDiv.append(weatherDescription24);
-
-					    		// // day 5 forecast
-					    		// const weatherDate32 = $('<p>').text('Date: ' + weatherResponse.list[32].dt_txt)
-					    		// weatherDiv.append(weatherDate32);
-
-					    		// let tempFar32 = weatherResponse.list[32].main.temp * 9/5 - 459.67;
-					    		// let tempFarRounded32 = Math.floor(tempFar32);
-					    		
-					    		// const weatherMain32 = $('<p>').text('Temperature: ' + tempFarRounded32 + ' degrees F');
-					    		// weatherDiv.append(weatherMain32);
-
-					    		// const weatherDescription32 = $('<p>').text(weatherResponse.list[32].weather[0].description);
-					    		// weatherDiv.append(weatherDescription32);
-
 					    		$('#weather-view').empty();
 					    		$('#buttonContainer').prepend(weatherDiv);
 
@@ -604,12 +547,7 @@ $(document).ready(function() {
 
 					    	})			
 				})
-			
-	//save for later allows to show allows to clear the page without changing files
-	$('#home').on('click', function(){
-		$('#wholeContainer').show();
-	})
-
 
 // closing tag for document ready
 });
+

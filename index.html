@@ -8,11 +8,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+	
 	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 	
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -36,15 +37,6 @@
         <header id="header">
             <div>
                 <h1>Camping Made Easy</h1>
-            <!--     <div id="draggable" class="ui-widget-content">
-                    <img src="assets/images/water.png" height="100px" width="100px">
-                  <p></p>
-                </div>
-                
-                <div id="droppable" class="ui-widget-header">
-                    <img src="assets/images/recycling.png" height="100px" width="100px">
-                  <p></p>
-                </div> -->
             </div>
         </header>
     </div>
@@ -54,13 +46,13 @@
     <nav id="menu" class="navbar navbar-default">
         <ul>
             <li id="home"> 
-                <a class="glyphicon glyphicon-home" href="#">Home</a>
+                <a class="glyphicon glyphicon-home" href="#container">Home</a>
             </li>
             <li id="camping">
-                <a class="glyphicon glyphicon-leaf" href="#"></a>Camping-Prep
+                <a class="glyphicon glyphicon-leaf" href="#prepHref">Camping-Prep</a>
             </li>
-            <li id="misc" class="glyphicon glyphicon-tree-conifer">
-                <a href="#">Miscellaneous</a>
+            <li id="donate-link">
+            	<a class="glyphicon glyphicon-globe" href="#donate-hold">Non-Profits</a>
             </li>
         </ul>
     </nav>
@@ -87,7 +79,7 @@
 
 	<div id="weather-view"> </div>
 
-	<div id="map" style='width: 700px; height: 600px;'> </div>
+	<div id="map" style='width: 400px; height: 300px;'> </div>
 
 	<div id="detail-view"> </div>
 
@@ -134,7 +126,7 @@
     </div>
 
             <!-- CAMPING PREP LIST -->
-
+		<div id="prepHref"></div>
         <div id="prepHeader">
     <h1>How to Be Prepared</h1>
   </div>
@@ -211,7 +203,23 @@
               <h5 class="card-title">Beginner's Trapping Guide</h5>
               <p class="card-text">A breakdown of various animal traps.</p>
           </div>
+
+
+
+        
+      <!-- The Modal that will popup when an image is clicked -->
+        <div id="myModal" class="w3s-modal">
+        <!-- The Close Button -->
+          <span class="close">&times;</span>
+
+        <!-- Modal Content (The Image) -->
+          <img class="w3s-modal-content" id="img01">
+        <!-- Caption -->
+          <div id="caption"></div>
         </div>
+		</div>
+	</div>
+
 
         
       <!-- The Modal that will popup when an image is clicked -->
@@ -233,7 +241,7 @@
     <div id="bgimg-3">
         <div class="adventure">
             <div class="caption">
-                and enjoy your adventure!
+                And Enjoy Your Adventure!
             </div>
         </div>
     </div>
@@ -255,7 +263,7 @@
 
 
 <script type="text/javascript" src="assets/javascript/camping.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="assets/javascript/bootstrap.js"></script>
 
 
 </body>
