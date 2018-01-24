@@ -184,4 +184,19 @@ body{
 
 iframe {
 	overflow: scroll;
+	margin-top: -160px;
+}
+
+#carouselContainer {
+	background-color: #444;
+	margin-top: 40px;
+}
+
+.carousel-inner {
+	margin-left: 225px;
+	margin-right: 0px;
+}
+
+.carousel-item {
+	max-width: 1000px;
 }
