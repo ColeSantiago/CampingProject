@@ -298,7 +298,7 @@ $(document).ready(function() {
     }).done(response => {
     	
     	window.res = response;
-    	// console.log(response);
+    	console.log(response);
 
     		let name = $(res).find('result').each(function(r) { 
 

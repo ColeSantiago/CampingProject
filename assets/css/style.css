@@ -555,3 +555,10 @@ iframe {
         width: 100%;
     }
 }
+
+
+
+.arrow:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
