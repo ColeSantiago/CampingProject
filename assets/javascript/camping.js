@@ -400,6 +400,14 @@ $(document).ready(function() {
 						  .setHTML($(this).attr('data-camp'))
 						  .addTo(map);
 
+						    map.on('click', campPhoto, function (e) {
+        						new mapboxgl.Popup()
+            					.setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
+            					.setHTML($(this).attr('data-camp'))
+            					.addTo(map);
+            					console.log('ive been clicked')
+   							 });
+
 					// end map
 
 					// trail api
@@ -450,10 +458,10 @@ $(document).ready(function() {
 								  .setHTML('Trail: ' + trailName)
 								  .addTo(map);
 
-						// end map
-						// end trail api
+								// end map
+								// end trail api
 
-				    }    
+				   			}    
 
 				})
 
