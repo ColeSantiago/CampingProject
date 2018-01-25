@@ -373,6 +373,22 @@ $(document).ready(function() {
     })
 
 }
+						$( function() {
+					    $( "#draggable" ).draggable({ revert: "invalid" });
+					 
+					    $( "#droppable" ).droppable({
+					      classes: {
+					        "ui-droppable-active": "ui-state-active",
+					        "ui-droppable-hover": "ui-state-hover"
+					      },
+					      drop: function( event, ui ) {
+					        $( this )
+					          .addClass( "ui-state-highlight" )
+					          .find( "p" )
+					            .html( "Recycle! Refuel!" );
+					      }
+					    });
+					  } );
 
 			$(document).on('click', '.camp-button', function(){ 
 
