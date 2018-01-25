@@ -90,6 +90,7 @@ $(document).ready(function() {
                 stickyNav();
             });
 
+<<<<<<< HEAD
             // map on load
 
             mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
@@ -145,6 +146,85 @@ $(document).ready(function() {
             // map plus minus button
             map.addControl(new mapboxgl.NavigationControl());
             // end map  
+=======
+    //         map disappears as you scroll over the 2nd background div    
+ 			// Ryan added 01/24/18
+ 
+		 	$(window).scroll(function(){
+		     	
+		 	    var distanceFromTop = $(document).scrollTop() + 'px';
+		 	    	
+		 	    	if(distanceFromTop < '300px' ) {
+		 	    // set div height to 0px because I can't get it to fade in!
+		 	        	$('#map').css('height', '0px');
+		 	    	}   
+		 	    	else if(distanceFromTop >= '300px' && distanceFromTop <='350px') {
+		 	    // reduce the div height        
+		 	        	$('#map').css('height', '0px');
+		 	    	}
+		 	    // do something with height if required
+		 	    	else if(distanceFromTop > '600px') {
+		 	    // set div height to 100px
+		 	        	$('#map').css('height', '300px');
+		 	    	}   
+		 	});
+
+			// map on load
+
+			mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
+			var map = new mapboxgl.Map({
+				container: 'map',
+				style: 'mapbox://styles/mapbox/outdoors-v10',
+				center: [-103.579102, 48.365374],
+				zoom: 2
+			});
+
+			// adds hillshading to the map
+			map.on('load', function () {
+				map.addSource('dem', {
+				"type": "raster-dem",
+				"url": "mapbox://mapbox.terrain-rgb"
+			});
+			map.addLayer({
+				"id": "hillshading",
+				"source": "dem",
+				"type": "hillshade"
+				}, 'waterway-river-canal-shadow');
+			});
+
+			// finds the users location
+			map.addControl(new mapboxgl.GeolocateControl({
+				positionOptions: {
+					enableHighAccuracy: true
+				},
+					trackUserLocation: true
+			}));
+	
+			// adds directions section
+			map.addControl(new MapboxDirections({
+				accessToken: mapboxgl.accessToken
+			}), 'top-left');
+
+			// scrolls to the location of your mouse on the map
+			if (map.mouseenter) {
+				window.onscroll = function() {
+					var chapterNames = Object.keys(chapters);
+						for (var i = 0; i < chapterNames.length; i++) {
+						     var chapterName = chapterNames[i];
+						     if (isElementOnScreen(chapterName)) {
+						        setActiveChapter(chapterName);
+						        break;
+						     }
+					}
+
+				}
+
+			};
+
+			// map plus minus button
+			map.addControl(new mapboxgl.NavigationControl());
+			// end map  
+>>>>>>> 770fd88969b0de3467ae5433f99b6725ee2a41a7
 
 // array of states and abbrivs
     const stateArr = [
@@ -252,6 +332,7 @@ $(document).ready(function() {
         $('.arrow').hide();
         $('#container').empty();
         $('#carouselContainer').css('display', 'none');
+        $('#wholeContainer').css('margin-left', '40px');
         stateDiv();
         stateName();
     });
@@ -351,6 +432,7 @@ $(document).ready(function() {
 
 }
 
+<<<<<<< HEAD
             $(document).on('click', '.camp-button', function(){ 
 
                 $('.camp-button').hide();
@@ -409,6 +491,67 @@ $(document).ready(function() {
                                 const url = response.trails[i].url;
 
                                 $('#slide'+ (i + 1)).attr("src", url);
+=======
+			$(document).on('click', '.camp-button', function(){ 
+
+				$('.camp-button').hide();
+				$('#carouselContainer').css({'display':'flex', 'justify-content': 'center'});
+				$('#map').show();
+				$('#wholeContainer').css('margin-left', '60px');
+
+
+						// map when you select a campsite
+
+						// marker image and adding the marker to the page
+						let campPhoto = $(this).attr('data-photo')
+						let markerImg = new Image();
+						markerImg.src = campPhoto;
+						markerImg.style.height = '50px';
+			    		markerImg.style.width = '50px';
+			    		markerImg.style.borderRadius = '25px';
+
+						let marker = new mapboxgl.Marker(markerImg)
+						.setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
+						.addTo(map)								
+
+						// flys to the location of the campsite
+						map.flyTo({
+						        center: [$(this).attr('data-long'), $(this).attr('data-lat')],
+						        zoom: 11
+						    })
+
+						// map popup message
+						var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+						var popupOffsets = {
+						 'top': [0, 0],
+						 'top-left': [0,0],
+						 'top-right': [0,0],
+						 'bottom': [0, -markerHeight],
+						 'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+						 'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+						 'left': [markerRadius, (markerHeight - markerRadius) * -1],
+						 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+						 };
+						var popup = new mapboxgl.Popup({offset:popupOffsets})
+						  .setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
+						  .setHTML($(this).attr('data-camp'))
+						  .addTo(map);
+
+					// end map
+
+					// trail api
+					const trailsqueryURL = "https://www.hikingproject.com/data/get-trails?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
+				    "&maxDistance=10&maxResults=5&key=200209593-2d1e8288276f62fa07701a4f0905a28f"
+
+				     $.ajax({
+				        url: trailsqueryURL,
+				        method: "GET",
+				    	}).done(response => {
+				    		for (let i = 0; i < response.trails.length; i++){
+                        		const url = response.trails[i].url;
+
+                        		$('#slide'+ (i + 1)).attr("src", url);
+>>>>>>> 770fd88969b0de3467ae5433f99b6725ee2a41a7
                             }
                             
                             // $('.carousel').carousel({interval: 1000})

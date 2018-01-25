@@ -1,3 +1,11 @@
+/*Created By*/
+/*Cole Santiago*/
+/*Christina Bertram*/
+/*Estiven Salazar*/
+/*Kyle Makinen*/
+/*Ryan Retirado*/
+/*Vincent Cavallaro*/
+
 body{
     height: 100%;
     background-image: url(../images/topography.png);
@@ -118,6 +126,16 @@ body{
     z-index: 100;
     border-top: 0;
 }
+#map {
+   width: 400px; 
+   height: 300px;
+   border: 2px solid lightgray; /* Ryan added 1/24/18 */
+   position: fixed;
+   bottom: 0px;
+   z-index: 150;
+   display: none;
+}
+
 #prep{
     width: 940px;
     height: 472px;
