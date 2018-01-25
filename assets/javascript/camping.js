@@ -90,6 +90,28 @@ $(document).ready(function() {
                 stickyNav();
             });
 
+    //         map disappears as you scroll over the 2nd background div    
+ 			// Ryan added 01/24/18
+ 
+		 	$(window).scroll(function(){
+		     	
+		 	    var distanceFromTop = $(document).scrollTop() + 'px';
+		 	    	
+		 	    	if(distanceFromTop < '300px' ) {
+		 	    // set div height to 0px because I can't get it to fade in!
+		 	        	$('#map').css('height', '0px');
+		 	    	}   
+		 	    	else if(distanceFromTop >= '300px' && distanceFromTop <='350px') {
+		 	    // reduce the div height        
+		 	        	$('#map').css('height', '0px');
+		 	    	}
+		 	    // do something with height if required
+		 	    	else if(distanceFromTop > '600px') {
+		 	    // set div height to 100px
+		 	        	$('#map').css('height', '300px');
+		 	    	}   
+		 	});
+
 			// map on load
 
 			mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
@@ -252,6 +274,7 @@ $(document).ready(function() {
         $('.arrow').hide();
         $('#container').empty();
         $('#carouselContainer').css('display', 'none');
+        $('#wholeContainer').css('margin-left', '40px');
         stateDiv();
         stateName();
     });
@@ -355,7 +378,8 @@ $(document).ready(function() {
 
 				$('.camp-button').hide();
 				$('#carouselContainer').css({'display':'flex', 'justify-content': 'center'});
-				
+				$('#map').show();
+				$('#wholeContainer').css('margin-left', '60px');
 
 
 						// map when you select a campsite
