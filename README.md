@@ -41,7 +41,7 @@ At the bottom of the page there is information and multiple links for non profit
 
 ---------------------------
 
-[Try out the site!]()
+[Try out the site!](https://colesantiago.github.io/CampingProject/)
 
 ## This was a team effort! 
 
