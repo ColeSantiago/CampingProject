@@ -27,6 +27,8 @@ Information like the campsites address, a short description of the site, a reser
 
 A map will also appear, zooming into the campsites location. Any available trails nearby will also be marked on the map.
 
+![campsites](https://raw.githubusercontent.com/ColeSantiago/CampingProject/master/assets/images/camping.png)
+
 -----------------------------
 
 ## Other app features:
@@ -35,9 +37,13 @@ A map will also appear, zooming into the campsites location. Any available trail
 
 A modal of multiple camping tips is also featured on the page.
 
+![camp tips](https://raw.githubusercontent.com/ColeSantiago/CampingProject/master/assets/images/camping-2.png)
+
 ### Non Profits:
 
 At the bottom of the page there is information and multiple links for non profits having to do with the forest and the enviorment.
+
+![non profits](https://raw.githubusercontent.com/ColeSantiago/CampingProject/master/assets/images/camping-3.png)
 
 ---------------------------
 
