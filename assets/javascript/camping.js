@@ -1,13 +1,10 @@
 $(document).ready(function() {
-
-	//Modal Image Code
-
+	//----------------------------------------Modal Image Code---------------------------------
 	// Get the modal
 	let modal = document.getElementById('myModal');
 	let modalImg = document.getElementById("img01");
 	let captionText = document.getElementById("caption");
-
-//Image Objects
+	//Image Objects
 	const tipCards = {
 	  'backpack': {
 	    longImage: 'assets/images/camp-prep-1-long.jpg',
@@ -41,39 +38,33 @@ $(document).ready(function() {
 	  },
 	};
 
-// Opens modal and calls on object's longImage property.
+	// Opens modal and calls on object's longImage property.
 	$(".tip-card").on("click", function() {
-	  const id = document.getElementById(this.id);
-	  let tipCardsItems = tipCards[this.id];
-	// Console logging object info
-	  console.log(id);
-	  console.log(tipCardsItems);
-
-	  modal.style.display = "block";
-	  const modalImage = document.querySelector('.w3s-modal-content');
-	  modalImage.src = tipCards[this.id].longImage;
-	  captionText.innerHTML = this.alt;
-
+	  	const id = document.getElementById(this.id);
+	  	let tipCardsItems = tipCards[this.id];
+		// Console logging object info
+	  	console.log(id);
+	  	console.log(tipCardsItems);
+	  	modal.style.display = "block";
+	  	const modalImage = document.querySelector('.w3s-modal-content');
+	  	modalImage.src = tipCards[this.id].longImage;
+	  	captionText.innerHTML = this.alt;
 	  });
 
 	// Get the <span> element that closes the modal
 	let span = document.getElementsByClassName("close")[0];
-
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() { 
 	  modal.style.display = "none";
 	}
-	// end modal
 
+	// -----------------------------sticky nav--------------------------------------------
 		$(".arrow").hide();
-
 		// grab the initial top offset of the navigation 
-        var stickyNavTop = $('#menu').offset().top;
-               
+        var stickyNavTop = $('#menu').offset().top;        
         // our function that decides weather the navigation bar should have "fixed" css position or not.
         var stickyNav = function(){
-            var scrollTop = $(window).scrollTop(); // our current vertical position from the top
-                     
+            var scrollTop = $(window).scrollTop(); // our current vertical position from the top          
             // if we've scrolled more than the navigation, change its position to fixed to stick to top,
             // otherwise change it back to relative
             if (scrollTop > stickyNavTop) { 
@@ -83,92 +74,77 @@ $(document).ready(function() {
                 $('#menu').removeClass('stickynavbar'); 
             }
         };
-
+        stickyNav();
+        // and run it again every time you scroll
+        $(window).scroll(function() {
             stickyNav();
-            // and run it again every time you scroll
-            $(window).scroll(function() {
-                stickyNav();
-            });
-
-    //         map disappears as you scroll over the 2nd background div    
- 			// Ryan added 01/24/18
- 
-		 	$(window).scroll(function(){
-		     	
-		 	    var distanceFromTop = $(document).scrollTop() + 'px';
-		 	    	
-		 	    	if(distanceFromTop < '300px' ) {
-		 	    // set div height to 0px because I can't get it to fade in!
-		 	        	$('#map').css('height', '0px');
-		 	    	}   
-		 	    	else if(distanceFromTop >= '300px' && distanceFromTop <='350px') {
-		 	    // reduce the div height        
-		 	        	$('#map').css('height', '0px');
-		 	    	}
-		 	    // do something with height if required
-		 	    	else if(distanceFromTop > '600px') {
-		 	    // set div height to 100px
-		 	        	$('#map').css('height', '300px');
-		 	    	}   
-		 	});
-
-			// map on load
-
-			mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
-			var map = new mapboxgl.Map({
-				container: 'map',
-				style: 'mapbox://styles/mapbox/outdoors-v10',
-				center: [-103.579102, 48.365374],
-				zoom: 2
-			});
-
-			// adds hillshading to the map
-			map.on('load', function () {
-				map.addSource('dem', {
-				"type": "raster-dem",
-				"url": "mapbox://mapbox.terrain-rgb"
-			});
-			map.addLayer({
-				"id": "hillshading",
-				"source": "dem",
-				"type": "hillshade"
-				}, 'waterway-river-canal-shadow');
-			});
-
-			// finds the users location
-			map.addControl(new mapboxgl.GeolocateControl({
-				positionOptions: {
-					enableHighAccuracy: true
-				},
-					trackUserLocation: true
-			}));
+        });
+	// map disappears as you scroll over the 2nd background div    
+ 	// Ryan added 01/24/18
+	$(window).scroll(function(){	
+		var distanceFromTop = $(document).scrollTop() + 'px';	
+		if(distanceFromTop < '300px' ) {
+			// set div height to 0px because I can't get it to fade in!
+			$('#map').css('height', '0px');
+		} else if(distanceFromTop >= '300px' && distanceFromTop <='350px') {
+			// reduce the div height        
+			$('#map').css('height', '0px');
+		}
+		// do something with height if required
+		else if(distanceFromTop > '600px') {
+		 	// set div height to 100px
+		 	$('#map').css('height', '300px');
+		}   
+	});
 	
-			// adds directions section
-			map.addControl(new MapboxDirections({
-				accessToken: mapboxgl.accessToken
-			}), 'top-left');
-
-			// scrolls to the location of your mouse on the map
-			if (map.mouseenter) {
-				window.onscroll = function() {
-					var chapterNames = Object.keys(chapters);
-						for (var i = 0; i < chapterNames.length; i++) {
-						     var chapterName = chapterNames[i];
-						     if (isElementOnScreen(chapterName)) {
-						        setActiveChapter(chapterName);
-						        break;
-						     }
-					}
-
+	// -------------------------------map on load---------------------------------------
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvd25jb2F0IiwiYSI6ImNqY2Nvb3NibjBpbWIyeW50NHZ6cGZmODUifQ.tAp8DhP9budvHomRqyv0lg';
+	var map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/mapbox/outdoors-v10',
+		center: [-103.579102, 48.365374],
+		zoom: 2
+	});
+	// adds hillshading to the map
+	map.on('load', function () {
+		map.addSource('dem', {
+			"type": "raster-dem",
+			"url": "mapbox://mapbox.terrain-rgb"
+		});
+		map.addLayer({
+			"id": "hillshading",
+			"source": "dem",
+			"type": "hillshade"
+		}, 'waterway-river-canal-shadow');
+	});
+	// finds the users location
+	map.addControl(new mapboxgl.GeolocateControl({
+		positionOptions: {
+			enableHighAccuracy: true
+		},
+		trackUserLocation: true
+	}));
+	// adds directions section
+	map.addControl(new MapboxDirections({
+		accessToken: mapboxgl.accessToken
+	}), 'top-left');
+	// scrolls to the location of your mouse on the map
+	if (map.mouseenter) {
+		window.onscroll = function() {
+			var chapterNames = Object.keys(chapters);
+			for (var i = 0; i < chapterNames.length; i++) {
+				var chapterName = chapterNames[i];
+				if (isElementOnScreen(chapterName)) {
+					setActiveChapter(chapterName);
+					break;
 				}
+			}
+		}
+	};
+	// map plus minus button
+	map.addControl(new mapboxgl.NavigationControl());
 
-			};
-
-			// map plus minus button
-			map.addControl(new mapboxgl.NavigationControl());
-			// end map  
-
-// array of states and abbrivs
+	// ------------------------------------array of states and abbrivs------------------------------------------
 	const stateArr = [
 	{state:"Alabama", abbr: "AL"}, {state:"Alaska", abbr: "AK"},{state:"Arizona", abbr: "AZ"},{state:"Arkansas", abbr: "AR"},
 	{state:"California", abbr: "CA"},{state:"Colorado", abbr: "CO"},{state:"Connecticut", abbr: "CT"},{state:"Delaware", abbr: "DE"},
@@ -252,22 +228,19 @@ $(document).ready(function() {
         $(nonProfitContainer).append(donateDiv);
 
         $('#donate-hold').append(nonProfitContainer);
-
     };
 
-	//looping through and displaying each state in the above array as well as
+//looping through and displaying each state in the above array as well as
 	//giving it the value of abbr
- function stateDiv(){
-    for (let i = 0; i < stateArr.length; i++){
-        let newDiv = $('<div class="stateDiv">');
-        let abbr = stateArr[i].abbr;
-        // let arrowDiv = $('<div>');
-        newDiv.html('<button value="'+stateArr[i].abbr+'" class="stateName">' + stateArr[i].state + '</button>');
-        // arrowDiv.html("<span class='glyphicon glyphicon-arrow-left'>")
-        $("#container").append(newDiv);
-        // $(newDiv).prepend(arrowDiv);
-     }
-  }
+ 	function stateDiv(){
+    	for (let i = 0; i < stateArr.length; i++){
+        	let newDiv = $('<div class="stateDiv">');
+        	let abbr = stateArr[i].abbr;
+        	newDiv.html('<button value="'+stateArr[i].abbr+'" class="stateName">' + stateArr[i].state + '</button>');
+        	$("#container").append(newDiv);
+     	}
+  	};
+
     stateDiv();
     stateName();
      $('.arrow').on('click',function(){
@@ -281,18 +254,15 @@ $(document).ready(function() {
     //with the value abbr we can then access the api when the user clicks
     //without any input and we return the response
     function stateName(){$(".stateName").on('click', function(){
-
     	$('#buttonContainer').empty();
-
         $('.arrow').fadeIn('slow');
         let abbr = $(this).val();
-
         const clickedElement = this;
         $('.stateName').each(function() {
-        if(this !== clickedElement) {
-        $(this).hide();    
-        }});
-        console.log(abbr);
+        	if(this !== clickedElement) {
+        		$(this).hide();    
+        	}
+        });
 
         $(this).animate({
             opacity: 1,
@@ -301,52 +271,39 @@ $(document).ready(function() {
 
         $('.stateDiv').css({"display":"inline", "margin":"0px"});
 
-        // $("#container").css("overflow", "hidden");
-
-        const queryURL = "https://api.amp.active.com/camping/campgrounds/?pstate=" + abbr
-            + "&json=true&api_key=8av4h3s7ecqejs3gbhcj6q6h";
-        const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
+    // -----------------------------Camp API------------------------------------------
+    // grabbing all of the information we need for each camp from the api and appending it to the html
+    const queryURL = "https://api.amp.active.com/camping/campgrounds/?pstate=" + abbr
+    + "&json=true&api_key=8av4h3s7ecqejs3gbhcj6q6h";
+    const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
     $.ajax({
         url: proxyUrl + queryURL,
         method: "GET",
         headers:{
             authorization: 'Bearer ' + '8av4h3s7ecqejs3gbhcj6q6h'
         }
-    }).done(response => {
-    	
+    }).done(response => {	
     	window.res = response;
-    	console.log(response);
-
     		let name = $(res).find('result').each(function(r) { 
-
 	    		let nameTwo = $(this).attr('facilityName');
-
 	    		let lat = $(this).attr('latitude');
-	    		// console.log(lat);
 	    		let long = $(this).attr('longitude');
-	    		// console.log(long);
-	    		const imgURL = 'http://www.reserveamerica.com/' + $(this).attr('faciltyPhoto');
-	    		    		
-	    		let facilityId = $(this).attr('facilityID');
-	    		
+	    		const imgURL = 'http://www.reserveamerica.com/' + $(this).attr('faciltyPhoto');    		
+	    		let facilityId = $(this).attr('facilityID');	    		
 	    		let contractId = $(this).attr('contractID');
-
 	    		let campArray = [];
 	    		let longArray = [];
 	    		let latArray = [];
 	    		let facilityArray = [];
 	    		let contractArray = [];
 	    		let photoArray = [];
-
 	    		const campButtons = $('<button class="camp-button"><a></a></button>');
-
 	    		longArray.push(long);
 	    		latArray.push(lat);
 	    		campArray.push(nameTwo);
 	    		facilityArray.push(facilityId);
 	    		contractArray.push(contractId);
 	    		photoArray.push(imgURL);
-
     		// adding camp buttons to the html when the state is clicked
     		$('#container').append($("<div id='buttonContainer'>"));
                 // adding to the html
@@ -369,225 +326,169 @@ $(document).ready(function() {
                     }
                  })
 	    })
-
     })
+};
 
-}
-						$( function() {
-					    $( "#draggable" ).draggable({ revert: "invalid" });
-					 
-					    $( "#droppable" ).droppable({
-					      classes: {
-					        "ui-droppable-active": "ui-state-active",
-					        "ui-droppable-hover": "ui-state-hover"
-					      },
-					      drop: function( event, ui ) {
-					        $( this )
-					          .addClass( "ui-state-highlight" )
-					          .find( "p" )
-					            .html( "Recycle! Refuel!" );
-					      }
-					    });
-					  } );
+	// ----------------------------water bottle drag function on page----------------------------------
+	$( function() {
+		$( "#draggable" ).draggable({ revert: "invalid" });
+		$( "#droppable" ).droppable({
+			classes: {
+				"ui-droppable-active": "ui-state-active",
+				"ui-droppable-hover": "ui-state-hover"
+			},
+		drop: function( event, ui ) {
+			$( this )
+			.addClass( "ui-state-highlight" )
+			.find( "p" )
+			.html( "Recycle! Refuel!" );
+		}
+		});
+	});
+	// ----------------------------------map when you select a campsite--------------------------------
+	$(document).on('click', '.camp-button', function(){ 
+		$('.camp-button').hide();
+		$('#carouselContainer').css({'display':'flex', 'justify-content': 'center'});
+		$('#map').show();
+		$('#wholeContainer').css('margin-left', '60px');	
+		// marker image and adding the marker to the page
+		let campPhoto = $(this).attr('data-photo')
+		let markerImg = new Image();
+		markerImg.src = campPhoto;
+		markerImg.style.height = '50px';
+		markerImg.style.width = '50px';
+		markerImg.style.borderRadius = '25px';
+		let marker = new mapboxgl.Marker(markerImg)
+		.setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
+		.addTo(map)								
+		// flys to the location of the campsite
+		map.flyTo({
+			center: [$(this).attr('data-long'), $(this).attr('data-lat')],
+			zoom: 11
+		})
+	// map popup message
+	var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+	var popupOffsets = {
+		'top': [0, 0],
+		'top-left': [0,0],
+		'top-right': [0,0],
+		'bottom': [0, -markerHeight],
+		'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+		'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+		'left': [markerRadius, (markerHeight - markerRadius) * -1],
+		'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+	};
+	var popup = new mapboxgl.Popup({offset:popupOffsets})
+	.setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
+	.setHTML($(this).attr('data-camp'))
+	.addTo(map);
 
-			$(document).on('click', '.camp-button', function(){ 
-
-				$('.camp-button').hide();
-				$('#carouselContainer').css({'display':'flex', 'justify-content': 'center'});
-				$('#map').show();
-				$('#wholeContainer').css('margin-left', '60px');
-
-
-						// map when you select a campsite
-
-						// marker image and adding the marker to the page
-						let campPhoto = $(this).attr('data-photo')
-						let markerImg = new Image();
-						markerImg.src = campPhoto;
-						markerImg.style.height = '50px';
-			    		markerImg.style.width = '50px';
-			    		markerImg.style.borderRadius = '25px';
-
-						let marker = new mapboxgl.Marker(markerImg)
-						.setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
-						.addTo(map)								
-
-						// flys to the location of the campsite
-						map.flyTo({
-						        center: [$(this).attr('data-long'), $(this).attr('data-lat')],
-						        zoom: 11
-						    })
-
-						// map popup message
-						var markerHeight = 50, markerRadius = 10, linearOffset = 25;
-						var popupOffsets = {
-						 'top': [0, 0],
-						 'top-left': [0,0],
-						 'top-right': [0,0],
-						 'bottom': [0, -markerHeight],
-						 'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-						 'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-						 'left': [markerRadius, (markerHeight - markerRadius) * -1],
-						 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-						 };
-						var popup = new mapboxgl.Popup({offset:popupOffsets})
-						  .setLngLat([$(this).attr('data-long'), $(this).attr('data-lat')])
-						  .setHTML($(this).attr('data-camp'))
-						  .addTo(map);
-
-					// end map
-
-					// trail api
-					const trailsqueryURL = "https://www.hikingproject.com/data/get-trails?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
-				    "&maxDistance=10&maxResults=5&key=200209593-2d1e8288276f62fa07701a4f0905a28f"
-
-				     $.ajax({
-				        url: trailsqueryURL,
-				        method: "GET",
-				    	}).done(response => {
-				    		for (let i = 0; i < response.trails.length; i++){
-                        		const url = response.trails[i].url;
-
-                        		$('#slide'+ (i + 1)).attr("src", url);
-                            }
-                            
-                            // $('.carousel').carousel({interval: 1000})
-                
-				    		for (let i = 0; i < response.trails.length; i++){
-						    	let trailLat = response.trails[i].latitude;
-						    	let trailLong = response.trails[i].longitude;
-						    	let trailName = response.trails[i].name;
-   	
-	   							// adds trail locations to the map
-						    	let trailImg = new Image('id="trailDot');
-								trailImg.src = 'assets/images/dot.png';
-								trailImg.style.height = '20px';
-					    		trailImg.style.width = '20px';
-					    		trailImg.style.borderRadius = '25px';	
-
-								let marker = new mapboxgl.Marker(trailImg)
-								.setLngLat([trailLong, trailLat])
-								.addTo(map)
+	// -------------------------------------trail api----------------------------------------
+	const trailsqueryURL = "https://www.hikingproject.com/data/get-trails?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
+	"&maxDistance=10&maxResults=5&key=200209593-2d1e8288276f62fa07701a4f0905a28f"
+	$.ajax({
+		url: trailsqueryURL,
+		method: "GET",
+	}).done(response => {
+		for (let i = 0; i < response.trails.length; i++){
+        	const url = response.trails[i].url;
+        	$('#slide'+ (i + 1)).attr("src", url);
+        }                 
+        for (let i = 0; i < response.trails.length; i++){
+			let trailLat = response.trails[i].latitude;
+			let trailLong = response.trails[i].longitude;
+			let trailName = response.trails[i].name;
+	   		// adds trail locations to the map
+			let trailImg = new Image('id="trailDot');
+			trailImg.src = 'assets/images/dot.png';
+			trailImg.style.height = '20px';
+			trailImg.style.width = '20px';
+			trailImg.style.borderRadius = '25px';	
+			let marker = new mapboxgl.Marker(trailImg)
+			.setLngLat([trailLong, trailLat])
+			.addTo(map)
 								
-								var markerHeight = 10, markerRadius = 10, linearOffset = 25;
-								var popupOffsets = {
-								 'top': [0, 0],
-								 'top-left': [0,0],
-								 'top-right': [0,0],
-								 'bottom': [0, -markerHeight],
-								 'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-								 'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-								 'left': [markerRadius, (markerHeight - markerRadius) * -1],
-								 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-								 };
-								var popup = new mapboxgl.Popup({offset:popupOffsets})
-								  .setLngLat([trailLong, trailLat])
-								  .setHTML('Trail: ' + trailName)
-								  .addTo(map);
+			var markerHeight = 10, markerRadius = 10, linearOffset = 25;
+			var popupOffsets = {
+				'top': [0, 0],
+				'top-left': [0,0],
+				'top-right': [0,0],
+				'bottom': [0, -markerHeight],
+				'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+				'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+				'left': [markerRadius, (markerHeight - markerRadius) * -1],
+				'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+			};
+			var popup = new mapboxgl.Popup({offset:popupOffsets})
+			.setLngLat([trailLong, trailLat])
+			.setHTML('Trail: ' + trailName)
+			.addTo(map);
+		}    
+	});
 
-						// end map
-						// end trail api
-
-				    }    
-
-				})
-
-						// weather api
-						const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
-			    		"&APPID=187fb301a3565644c00135af35769e08";
-			    		
-				    	$.ajax({
-				    		url: queryURLWeather,
-				    		method: "GET"
-				    	}).done(function(weatherResponse) {
-
-				    		// console.log(weatherResponse);
-
-				    		const weatherDiv = $("<div class='weather'>");
-
-				    			// day 1 forecast
-					    		const weatherDate0 = $('<p>').text('Date: ' + weatherResponse.list[0].dt_txt);
-					    		weatherDiv.append(weatherDate0);
-
-					    		let tempFar0 = weatherResponse.list[0].main.temp * 9/5 - 459.67;
-					    		let tempFarRounded0 = Math.floor(tempFar0);
-
-					    		const weatherMain0 = $('<p>').text('Temperature: ' + tempFarRounded0 + ' degrees F');
-					    		weatherDiv.append(weatherMain0);
-
-					    		const weatherDescription0 = $('<p>').text(weatherResponse.list[0].weather[0].description);
-					    		weatherDiv.append(weatherDescription0);
-
-					    		$('#weather-view').empty();
-					    		$('#buttonContainer').prepend(weatherDiv);
-
-				    	})
+	// -----------------------------------------weather api----------------------------------------------
+	const queryURLWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + $(this).attr('data-lat') + "&lon=" + $(this).attr('data-long') + 
+	"&APPID=187fb301a3565644c00135af35769e08";
+	$.ajax({
+		url: queryURLWeather,
+		method: "GET"
+	}).done(function(weatherResponse) {
+		const weatherDiv = $("<div class='weather'>");
+		// day 1 forecast
+		const weatherDate0 = $('<p>').text('Date: ' + weatherResponse.list[0].dt_txt);
+		weatherDiv.append(weatherDate0);
+		let tempFar0 = weatherResponse.list[0].main.temp * 9/5 - 459.67;
+		let tempFarRounded0 = Math.floor(tempFar0);
+		const weatherMain0 = $('<p>').text('Temperature: ' + tempFarRounded0 + ' degrees F');
+		weatherDiv.append(weatherMain0);
+		const weatherDescription0 = $('<p>').text(weatherResponse.list[0].weather[0].description);
+		weatherDiv.append(weatherDescription0);
+		$('#weather-view').empty();
+		$('#buttonContainer').prepend(weatherDiv);
+	})
  	
-				    	// end weather api
+	// ----------------------------------------camp detail api----------------------------------------
+	const queryURL = "http://api.amp.active.com/camping/campground/details?contractCode=" + $(this).attr('data-contract') + "&parkId=" + $(this).attr('data-facility') + "&api_key=8av4h3s7ecqejs3gbhcj6q6h";
+	const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
+	$.ajax({
+		url: proxyUrl + queryURL,
+		method: "GET",
+		headers:{
+		authorization: 'Bearer ' + '8av4h3s7ecqejs3gbhcj6q6h'
+	}}).done(response => {	
+		window.res = response;
+		let detail = $(res).find('detailDescription').each(function(r) {		    			
+			const detailDiv = $("<div class='camp-details'>");
+			const facility = $('<p>').text($(this).attr('facility'));
+			detailDiv.append(facility);
+			let detailAddress = $(res).find('address').each(function(r) {
+				const city = $('<p class="city">').text($(this).attr('city'));
+                detailDiv.append(city);
+                const address = $('<p class="street">').text($(this).attr('streetAddress'));
+                detailDiv.append(address);
+                const zipCode = $('<p class="zip">').text($(this).attr('zip'));
+                detailDiv.append(zipCode);
+            })
+            const detailTwo = $('<p class="main-info">').text($(this).attr('description'));
+            detailDiv.append(detailTwo);
+            const recreation = $('<p class="rect-info">').text($(this).attr('recreationDescription'));
+            detailDiv.append(recreation);
+            const important = $('<p class="important-info">').text($(this).attr('importantInformation'));
+            detailDiv.append(important);
+			const reservation = $('<a>').text('Make a Reservation');
+			reservation.attr('href', $(this).attr('fullReservationUrl'));
+			reservation.attr('target', '_blank');
+			detailDiv.append(reservation);
+			const alert = $('<p>').text($(this).attr('alert'));
+			detailDiv.append(alert);
+			$('#detail-view').empty();
+			$('#buttonContainer').append(detailDiv);
+		})
 
-				    	// camp detail api
-				    	const queryURL = "http://api.amp.active.com/camping/campground/details?contractCode=" + $(this).attr('data-contract') + "&parkId=" + $(this).attr('data-facility') + "&api_key=8av4h3s7ecqejs3gbhcj6q6h";
-						const proxyUrl = 'https://shielded-hamlet-43668.herokuapp.com/';
-
-
-					    $.ajax({
-					    	url: proxyUrl + queryURL,
-					    	method: "GET",
-					    	headers:{
-					    		authorization: 'Bearer ' + '8av4h3s7ecqejs3gbhcj6q6h'
-
-					    	}
-					    }).done(response => {
-					    	
-					    	window.res = response;
-					    		console.log(response);
-
-					    		let detail = $(res).find('detailDescription').each(function(r) {
-					    			
-					    			const detailDiv = $("<div class='camp-details'>");
-
-					    				const facility = $('<p>').text($(this).attr('facility'));
-					    				detailDiv.append(facility);
-
-					    					let detailAddress = $(res).find('address').each(function(r) {
-
-					    						const city = $('<p class="city">').text($(this).attr('city'));
-                                                detailDiv.append(city);
-
-                                                const address = $('<p class="street">').text($(this).attr('streetAddress'));
-                                                detailDiv.append(address);
-
-                                                const zipCode = $('<p class="zip">').text($(this).attr('zip'));
-                                                detailDiv.append(zipCode);
-
-                                            })
-
-                                        const detailTwo = $('<p class="main-info">').text($(this).attr('description'));
-                                        detailDiv.append(detailTwo);
-
-                                        const recreation = $('<p class="rect-info">').text($(this).attr('recreationDescription'));
-                                        detailDiv.append(recreation);
-
-                                        const important = $('<p class="important-info">').text($(this).attr('importantInformation'));
-                                        detailDiv.append(important);
-
-						    			const reservation = $('<a>').text('Make a Reservation');
-						    			reservation.attr('href', $(this).attr('fullReservationUrl'));
-						    			reservation.attr('target', '_blank');
-						    			detailDiv.append(reservation);
-						    			console.log(reservation);
-
-						    			const alert = $('<p>').text($(this).attr('alert'));
-						    			detailDiv.append(alert);
-
-						    			$('#detail-view').empty();
-						    			$('#buttonContainer').append(detailDiv);
-
-					    		})
-
-					    	})			
-				})
+	})			
+})
 
 // closing tag for document ready
 });
+
 

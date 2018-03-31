@@ -2,9 +2,7 @@
 <html>
 <head>
 	<title>Camp Sites</title>
-
-	<!-- leave in this order! -->
-	
+	<!-- leave in this order! -->	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -13,7 +11,6 @@
 	
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -30,11 +27,8 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
 </head>
 <body>
-
-
 	<!-- FIRST BACKGROUND AND HEADER -->
     <div id="bgimg-1">
         <header id="header">
@@ -43,9 +37,7 @@
             </div>
         </header>
     </div>
-
     <!-- NAVBAR -->
-
     <nav id="menu" class="navbar navbar-default">
         <ul>
             <li id="home"> 
@@ -59,7 +51,6 @@
             </li>
         </ul>
     </nav>
-
 	<div class="container contentContainer marginTop">    
         <div class="row">
             <div id="wholeContainer"> 
@@ -77,15 +68,10 @@
             </div>
         </div>
     </div>
-
 	<div id="camp-name"> </div>
-
 	<div id="weather-view"> </div>
-
 	<div id="map"></div>
-
 	<div id="detail-view"> </div>
-
 	<!-- <div class="trailsDiv"> </div> -->
 			<div id="carouselContainer">
 			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -115,11 +101,8 @@
 			  </a>
 			</div>
 		</div>
-
 	<div id="trails-hold"></div>
-
 	  <!-- SECOND BACKGROUND -->
-
     <div id="bgimg-2">
         <div class="adventure">
             <div class="caption">
@@ -127,7 +110,6 @@
             </div>
         </div>
     </div>
-
             <!-- CAMPING PREP LIST -->
 		<div id="prepHref"></div>
         <div id="prepHeader">
@@ -205,11 +187,19 @@
           <div class="card-body">
               <h5 class="card-title">Beginner's Trapping Guide</h5>
               <p class="card-text">A breakdown of various animal traps.</p>
-          </div>
+          </div>   
+      <!-- The Modal that will popup when an image is clicked -->
+        <div id="myModal" class="w3s-modal">
+        <!-- The Close Button -->
+          <span class="close">&times;</span>
 
-
-
-        
+        <!-- Modal Content (The Image) -->
+          <img class="w3s-modal-content" id="img01">
+        <!-- Caption -->
+          <div id="caption"></div>
+        </div>
+		</div>
+	</div>      
       <!-- The Modal that will popup when an image is clicked -->
         <div id="myModal" class="w3s-modal">
         <!-- The Close Button -->
@@ -222,25 +212,7 @@
         </div>
 		</div>
 	</div>
-
-
-        
-      <!-- The Modal that will popup when an image is clicked -->
-        <div id="myModal" class="w3s-modal">
-        <!-- The Close Button -->
-          <span class="close">&times;</span>
-
-        <!-- Modal Content (The Image) -->
-          <img class="w3s-modal-content" id="img01">
-        <!-- Caption -->
-          <div id="caption"></div>
-        </div>
-		</div>
-	</div>
-
-
     <!-- THIRD BACKGROUND -->
-
     <div id="bgimg-3">
                 <div id="draggable" class="ui-widget-content">
                   <img src="assets/images/water.png" height="100px" width="100px">
@@ -256,22 +228,14 @@
             </div>
         </div>
     </div>
-
-
     <!-- NONPROFIT SECTION -->
-
    <div id="donate-hold"></div>
-
-	
-
     <!-- FOOTER -->
-
 <footer>
      <div id="footer">
-                    Copyright &copy; 2018 Project1
+          Copyright &copy; 2018 Project1
      </div>
 </footer>
-
 
 <script type="text/javascript" src="assets/javascript/camping.js"></script>
 <script type="text/javascript" src="assets/javascript/bootstrap.js"></script>
